@@ -6,38 +6,44 @@ public class bullet : MonoBehaviour
 {
 
     public float death_timer;
+    public float death_countdown;
     public Transform trans;
     public float damage;
-    public float spd;
     public string state;
     public Collider2D col;
+    public Rigidbody2D rb;
+    public bool applyForce = false;
 
     void Start() {
-        trans.position += new Vector3(0,0,-8);
+        death_countdown = death_timer;
     }
 
     void Update() {
         if (state != "null") {
             Invoke(state, 0f);
         }
+        if (death_countdown < 0) {
+            Destroy(gameObject);
+        }
     }
 
     void moveState() {
-        trans.position += trans.up * Time.deltaTime * spd;
+        if (applyForce == false) {
+            rb.AddForce(trans.up*1, ForceMode2D.Force);
+            applyForce = true;
+        }
+        RaycastHit2D hit = Physics2D.Raycast(trans.position, trans.TransformDirection(Vector2.up), 4f);
+        if (hit.collider != null) {
+            hit.transform.gameObject.SendMessage("takeDamage", damage);
+            Destroy(gameObject);
+        }
         col.enabled = true;
+        death_countdown -= Time.deltaTime;
     }
 
     void freezeState() {
         col.enabled = false;
-    }
-
-    void OnCollisionEnter2D(Collision2D col) {
-        if (state != "freezeState") {
-            string tag = col.gameObject.tag;
-            if (tag != "bullet") {
-                col.gameObject.SendMessage("takeDamage", damage);
-                Destroy(gameObject);
-            }
-        }
+        rb.velocity = new Vector2(0, 0);
+        applyForce = false;
     }
 }

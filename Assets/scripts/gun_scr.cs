@@ -6,7 +6,6 @@ public class gun_scr : MonoBehaviour
 {
     public Transform barrel;
     public GameObject bullet_prefab;
-    public float bullet_spd;
     public int clip;
     public int ammo;
     public int max_clip;
@@ -49,12 +48,23 @@ public class gun_scr : MonoBehaviour
     public void shoot() {
         if (shoot_cooldown <= 0) {
             if (clip != 0) {
-                GameObject bullet = Instantiate(bullet_prefab, barrel.position, barrel.rotation);
-                bullet bullet_scr = bullet.GetComponent<bullet>();
+                if (weapon == "shotgun") {
+                    GameObject bullet_obj_2 = Instantiate(bullet_prefab, barrel.position, barrel.rotation);
+                    bullet bullet_scr_2 = bullet_obj_2.GetComponent<bullet>();
+                    bullet_scr_2.damage = damage;
+                    Transform bullet_trans = bullet_obj_2.GetComponent<Transform>();
+                    bullet_trans.Rotate(Vector3.forward * 8);
+
+                    GameObject bullet_obj_3 = Instantiate(bullet_prefab, barrel.position, barrel.rotation);
+                    bullet bullet_scr_3 = bullet_obj_3.GetComponent<bullet>();
+                    bullet_scr_3.damage = damage;
+                    Transform bullet_trans_2 = bullet_obj_3.GetComponent<Transform>();
+                    bullet_trans_2.Rotate(Vector3.forward * -8);
+                }
+
+                GameObject bullet_obj = Instantiate(bullet_prefab, barrel.position, barrel.rotation);
+                bullet bullet_scr = bullet_obj.GetComponent<bullet>();
                 bullet_scr.damage = damage;
-                bullet_scr.spd = bullet_spd;
-                // Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
-                // bullet_rb.AddForce(barrel.up*bullet_spd, ForceMode2D.Impulse);
                 shoot_cooldown = shoot_timer;
                 clip -= 1;
                 if (ammo_text != null) {

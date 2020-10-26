@@ -61,20 +61,10 @@ public class player : MonoBehaviour
                 bullet bullet_scr = bullet.GetComponent<bullet>();
                 bullet_scr.state = "freezeState";
             }
-
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
-                enemy enemy_scr = enemy.GetComponent<enemy>();
-                enemy_scr.state = "freezeState";
-            }
         } else {
             foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("bullet")) {
                 bullet bullet_scr = bullet.GetComponent<bullet>();
                 bullet_scr.state = "moveState";
-            }
-
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
-                enemy enemy_scr = enemy.GetComponent<enemy>();
-                enemy_scr.state = "lastState";
             }
 
             if (freeze < 100) {
@@ -88,6 +78,11 @@ public class player : MonoBehaviour
             freeze = 0;
             is_freeze = false;
             filter.enabled = false;
+
+            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
+                enemy enemy_scr = enemy.GetComponent<enemy>();
+                enemy_scr.state = "lastState";
+            }
         }
 
         freeze_bar.set_freeze(freeze);
@@ -108,7 +103,6 @@ public class player : MonoBehaviour
         Vector2 gun_pos = new Vector2(gun.position.x, gun.position.y);
         Vector2 lookdir = mousepos - gun_pos;
         rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
-
         gun_scr.shoot_cooldown -= Time.deltaTime;
         if (Input.GetButton("shoot")) {
             if (can_shoot) {
@@ -153,9 +147,19 @@ public class player : MonoBehaviour
             if (is_freeze == false) {
                 is_freeze = true;
                 filter.enabled = true;
+
+                foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
+                    enemy enemy_scr = enemy.GetComponent<enemy>();
+                    enemy_scr.state = "freezeState";
+                }
             } else {
                 is_freeze = false;
                 filter.enabled = false;
+
+                foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
+                    enemy enemy_scr = enemy.GetComponent<enemy>();
+                    enemy_scr.state = "lastState";
+                }
             }
         }
     }
