@@ -172,7 +172,6 @@ MonoBehaviour:
   barrel: {fileID: 8977484169170483022}
   bullet_prefab: {fileID: 1407856483140768472, guid: 1664500f9ffe95d40b9a32ce7429d15b,
     type: 3}
-  bullet_spd: 45
   clip: 30
   ammo: 2147483647
   max_clip: 0
@@ -358,8 +357,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: 63}
-  m_SizeDelta: {x: 465.13528, y: 62.93821}
+  m_AnchoredPosition: {x: -2.3, y: 63}
+  m_SizeDelta: {x: 893.3141, y: 62.93821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2861411465774950106
 CanvasRenderer:
@@ -401,9 +400,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'wasd
-
-    w'
+  m_Text: wasd
 --- !u!114 &6766982660289177767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,6 +414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text_field: {fileID: 3969034281248461344}
+  trans: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &3316512969681450804
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +732,7 @@ MonoBehaviour:
   player_scr: {fileID: 0}
   weapon: {fileID: 3969034281248461344}
   chaseDis: 8
+  lr: {fileID: 0}
 --- !u!114 &4704619770559918152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,7 +779,7 @@ MonoBehaviour:
   repathRate: 0.1
   canSearch: 1
   canMove: 1
-  maxSpeed: 4
+  maxSpeed: 3.5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2

@@ -23,12 +23,19 @@ public class enemy : MonoBehaviour
     public Text weapon;
     public float chaseDis = 8f;
     public LineRenderer lr;
+    public float stagger_timer = 3f;
+    public float stagger_cooldown;
 
 
     // Start is called before the first frame update
     void Start() {
         hp = max_hp;
         hp_bar.set_max_hp(max_hp);
+        stagger_cooldown = stagger_timer;
+
+        follow_me = GameObject.Find("follow me").GetComponent<Transform>();
+        player = GameObject.Find("player").GetComponent<Transform>();
+        player_scr = GameObject.Find("player").GetComponent<player>();
 
         if (lr != null) {
             lr.enabled = false;
@@ -56,7 +63,13 @@ public class enemy : MonoBehaviour
             Invoke(state, 0f);
         }
 
-        if (hp <= 0) {
+
+        if (hp <= (max_hp*0.2) & state != "freezeState" & state != "staggerState") {
+            Debug.Log("im stagger");
+            state = "staggerState";
+        }
+
+        if (hp <= 0 & state != "freezeState") {
             hp = 0;
             state = "deathState";
         }
@@ -92,6 +105,8 @@ public class enemy : MonoBehaviour
     }
 
     public void chaseState() {
+        target = player;
+        aipath.canMove = true;
         desSetter.target = target;
         Vector2 dir = target.position - trans.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -132,9 +147,64 @@ public class enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void staggerState() {
+        gun.GetComponent<SpriteRenderer>().enabled = false;
+        aipath.canMove = false;
+        if (stagger_cooldown > 0) {
+            if(Mathf.Round(stagger_cooldown) % 2 == 0) {
+                GetComponent<SpriteRenderer>().enabled = false;
+            } else {
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
+            stagger_cooldown -= Time.deltaTime;
+        } else {
+            stagger_cooldown = stagger_timer;
+            gun.GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<SpriteRenderer>().enabled = true;
+            hp = max_hp*0.4f;
+            state = "chaseState";
+        }
+    }
+
     public void takeDamage(float damage) {
         if (hp > 0) {
             hp -= damage;
+        }
+        if (state != "freezeState" & state != "chaseState") {
+            state = "chaseState";
+            target = player;
+            if (gun_scr.weapon == "sniper") {
+                aipath.endReachedDistance = 10;
+            } else {
+                aipath.endReachedDistance = 5;
+            }
+        }
+    }
+    public void takeKnifeDamage(float damage) {
+        if (hp > 0) {
+            hp -= damage;
+        }
+        if (state == "staggerState") {
+            player_scr.hp += 20f;
+            state = "deathState";
+        }
+    }
+
+    public void takeTaseDamage(float damage) {
+        if (hp > 0) {
+            hp -= damage;
+        }
+        if (state == "staggerState") {
+            foreach (Transform child in player_scr.guns) {
+                gun_scr = child.GetComponent<gun_scr>();
+                gun_scr.ammo += gun_scr.max_clip;
+                if (child.name == player_scr.weapons[(int)player_scr.weapon]) {
+                    if (gun_scr.ammo_text != null) {
+                        gun_scr.ammo_text.set_ammo(gun_scr.clip, gun_scr.ammo, gun_scr.weapon);
+                    }
+                }
+            }
+            state = "deathState";
         }
     }
 }

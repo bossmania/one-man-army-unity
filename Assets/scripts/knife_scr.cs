@@ -8,14 +8,16 @@ public class knife_scr : MonoBehaviour
     public SpriteRenderer spr;
     public SpriteRenderer gun_spr;
     public player player_scr;
-    public float knife_timer = 1f;
+    public float knife_timer;
     public float knife_cooldown;
     public bool can_knife = false;
+    public Collider2D col;
 
     // Start is called before the first frame update
     void Start()
     {
         knife_cooldown = knife_timer;
+        col.enabled = false;
     }
 
     // Update is called once per frame
@@ -27,8 +29,11 @@ public class knife_scr : MonoBehaviour
                 spr.enabled = false;
                 gun_spr.enabled = true;
                 player_scr.can_shoot = true;
+                player_scr.can_knife = true;
+                player_scr.can_tase = true;
                 can_knife = false;
                 knife_cooldown = knife_timer;
+                col.enabled = false;
             }
         }
     }
@@ -37,6 +42,13 @@ public class knife_scr : MonoBehaviour
         spr.enabled = true;
         gun_spr.enabled = false;
         player_scr.can_shoot = false;
+        player_scr.can_knife = true;
+        player_scr.can_tase = false;
         can_knife = true;
+        col.enabled = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        col.gameObject.SendMessage("takeKnifeDamage", 10);
     }
 }

@@ -28,7 +28,7 @@ public class gun_scr : MonoBehaviour
     void Update()
     {
         shoot_cooldown -= Time.deltaTime;
-        if (clip <= 0) {
+        if (clip <= 0 & reload == false) {
             reload_handle();
         }
         if (reload) {
@@ -43,6 +43,10 @@ public class gun_scr : MonoBehaviour
                 }
             }
         }
+
+        // if (ammo_text != null) {
+        //     ammo_text.set_ammo(clip, ammo, weapon);
+        // }
     }
 
     public void shoot() {

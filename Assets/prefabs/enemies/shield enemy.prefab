@@ -65,8 +65,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: 63}
-  m_SizeDelta: {x: 465.13528, y: 62.93821}
+  m_AnchoredPosition: {x: -14, y: 63}
+  m_SizeDelta: {x: 893.95935, y: 62.93821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5477634333900280307
 CanvasRenderer:
@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text_field: {fileID: 7465845769327194402}
+  trans: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &2994677653806713557
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,8 +153,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2994677653806713557}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.292, y: -0.13, z: 0.49}
-  m_LocalScale: {x: 0.4272232, y: 3.0282948, z: 1}
+  m_LocalPosition: {x: 0.671, y: 0.162, z: 0.49}
+  m_LocalScale: {x: 0.24438763, y: 0.916256, z: 1}
   m_Children: []
   m_Father: {fileID: 7719628971117227109}
   m_RootOrder: 2
@@ -743,7 +745,7 @@ MonoBehaviour:
   repathRate: 0.1
   canSearch: 1
   canMove: 1
-  maxSpeed: 4
+  maxSpeed: 3
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -877,7 +879,7 @@ MonoBehaviour:
   ammo: 2147483647
   max_clip: 0
   weapon: shield
-  damage: 5
+  damage: 10
   shoot_timer: 1
   shoot_cooldown: 0
   ammo_text: {fileID: 0}

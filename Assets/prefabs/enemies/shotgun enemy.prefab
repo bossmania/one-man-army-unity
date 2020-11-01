@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trans: {fileID: 1662559367751367191}
-  max_hp: 125
+  max_hp: 150
   hp: 0
   hp_bar: {fileID: 1283514353588753674}
   state: wanderState
@@ -201,7 +201,7 @@ MonoBehaviour:
   repathRate: 0.1
   canSearch: 1
   canMove: 1
-  maxSpeed: 4
+  maxSpeed: 2
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -616,7 +616,7 @@ MonoBehaviour:
   max_clip: 0
   weapon: shotgun
   damage: 12
-  shoot_timer: 0.8
+  shoot_timer: 1.2
   shoot_cooldown: 0
   ammo_text: {fileID: 0}
   reload_timer: 5
@@ -657,8 +657,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: 63}
-  m_SizeDelta: {x: 465.13528, y: 62.93821}
+  m_AnchoredPosition: {x: 0.000015259, y: 50.429}
+  m_SizeDelta: {x: 689.60815, y: 62.93821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8295380773609278295
 CanvasRenderer:
@@ -716,6 +716,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text_field: {fileID: 7187197362207555501}
+  trans: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &8759622040666905735
 GameObject:
   m_ObjectHideFlags: 0

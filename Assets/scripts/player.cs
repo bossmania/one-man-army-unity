@@ -10,7 +10,6 @@ public class player : MonoBehaviour
     public Rigidbody2D rb;
     public Camera cam;
     public LineRenderer lr;
-
     public float max_hp = 100f;
     public float hp;
     public float max_freeze = 100f;
@@ -25,13 +24,31 @@ public class player : MonoBehaviour
     public Transform barrel;
     public Transform gun;
     public bool can_shoot = true;
+    public bool can_knife = true;
+    public bool can_tase = true;
     public gun_scr gun_scr;
+    public Transform guns;
+    public float weapon = 0;
+    [System.NonSerialized] public List<string> weapons = new List<string>();
     public knife_scr knife_scr;
+    public tase_scr tase_scr;
 
     public string state;
 
     Vector2 move;
     Vector2 mousepos;
+
+    void changeWeapon() {
+        foreach (Transform child in guns) {
+            if (weapons[(int)weapon] == child.name) {
+                gun = child.GetComponent<Transform>();
+                gun_scr = child.GetComponent<gun_scr>();
+                barrel = gun.GetChild(0).GetComponent<Transform>();
+            }
+        }
+        cam.orthographicSize = 8.83f;
+        ammo_text.set_ammo(gun_scr.clip, gun_scr.ammo, gun_scr.weapon);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +57,12 @@ public class player : MonoBehaviour
         freeze = max_freeze;
         freeze_bar.set_max_freeze(max_freeze);
         hp_bar.set_max_hp(max_hp);
-        ammo_text.set_ammo(gun_scr.clip, gun_scr.ammo, gun_scr.weapon);
+
+        foreach (Transform child in guns) {
+            weapons.Add(child.name);
+        }
+
+        changeWeapon();
     }
 
     // Update is called once per frame
@@ -67,10 +89,10 @@ public class player : MonoBehaviour
                 bullet_scr.state = "moveState";
             }
 
-            if (freeze < 100) {
+            if (freeze < max_freeze) {
                 freeze += freeze_add * Time.deltaTime;
             } else {
-                freeze = 100;
+                freeze = max_freeze;
             }
         }
 
@@ -99,11 +121,43 @@ public class player : MonoBehaviour
         move.x = Input.GetAxisRaw("hor");
         move.y = Input.GetAxisRaw("ver");
 
+        if (Input.GetAxis("scroll wheel") != 0) {
+            weapon += Input.GetAxis("scroll wheel");
+            if (weapon > weapons.Count-1) {
+                weapon = 0;
+            }
+            if (weapon < 0) {
+                weapon = weapons.Count-1;
+            }
+            changeWeapon();
+        }
+
+        if (Input.GetButton("pistol")) {
+            weapon = 0;
+            changeWeapon();
+        }
+
+        if (Input.GetButton("assault rifle")) {
+            weapon = 1;
+            changeWeapon();
+        }
+
+        if (Input.GetButton("shotgun")) {
+            weapon = 2;
+            changeWeapon();
+        }
+
+        if (Input.GetButton("sniper")) {
+            weapon = 3;
+            changeWeapon();
+        }
+
         mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 gun_pos = new Vector2(gun.position.x, gun.position.y);
         Vector2 lookdir = mousepos - gun_pos;
         rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
         gun_scr.shoot_cooldown -= Time.deltaTime;
+
         if (Input.GetButton("shoot")) {
             if (can_shoot) {
                 gun_scr.shoot();
@@ -127,16 +181,26 @@ public class player : MonoBehaviour
                 lr.endWidth = 0.05f;
                 lr.SetPositions(pos.ToArray());
                 lr.useWorldSpace = true;
+                if (weapons[(int)weapon] == "sniper") {
+                    cam.orthographicSize = 12f;
+                } else {
+                    cam.orthographicSize = 8.83f;
+                }
             } else {
                 lr.enabled = false;
             }
         }
         if (Input.GetButtonUp("aim")) {
             lr.enabled = false;
+            cam.orthographicSize = 8.83f;
         }
 
         if (Input.GetButtonDown("knife")) {
             knife_scr.knife();
+        }
+
+        if (Input.GetButtonDown("tase")) {
+            tase_scr.tase();
         }
 
         if (Input.GetButtonDown("reload")) {

@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: 63}
-  m_SizeDelta: {x: 465.13528, y: 62.93821}
+  m_AnchoredPosition: {x: -0.000015259, y: 61}
+  m_SizeDelta: {x: 941.4027, y: 62.93821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8780266691940385139
 CanvasRenderer:
@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text_field: {fileID: 5927214594476515746}
+  trans: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &4399225772448996290
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,12 +298,11 @@ MonoBehaviour:
   barrel: {fileID: 6824701067234587794}
   bullet_prefab: {fileID: 1407856483140768472, guid: 1664500f9ffe95d40b9a32ce7429d15b,
     type: 3}
-  bullet_spd: 45
   clip: 6
   ammo: 2147483647
   max_clip: 0
   weapon: Pistol
-  damage: 5
+  damage: 10
   shoot_timer: 1
   shoot_cooldown: 0
   ammo_text: {fileID: 0}
@@ -462,6 +463,7 @@ MonoBehaviour:
   player_scr: {fileID: 0}
   weapon: {fileID: 5927214594476515746}
   chaseDis: 8
+  lr: {fileID: 0}
 --- !u!114 &5301334982817116466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,7 +510,7 @@ MonoBehaviour:
   repathRate: 0.1
   canSearch: 1
   canMove: 1
-  maxSpeed: 4
+  maxSpeed: 5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
