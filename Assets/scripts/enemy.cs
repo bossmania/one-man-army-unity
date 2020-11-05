@@ -23,8 +23,10 @@ public class enemy : MonoBehaviour
     public Text weapon;
     public float chaseDis = 8f;
     public LineRenderer lr;
-    public float stagger_timer = 3f;
+    public float stagger_timer = 7f;
     public float stagger_cooldown;
+    public float stagger_flash_timer = 0.25f;
+    public float stagger_flash_cooldown;
 
 
     // Start is called before the first frame update
@@ -65,7 +67,6 @@ public class enemy : MonoBehaviour
 
 
         if (hp <= (max_hp*0.2) & state != "freezeState" & state != "staggerState") {
-            Debug.Log("im stagger");
             state = "staggerState";
         }
 
@@ -151,12 +152,16 @@ public class enemy : MonoBehaviour
         gun.GetComponent<SpriteRenderer>().enabled = false;
         aipath.canMove = false;
         if (stagger_cooldown > 0) {
-            if(Mathf.Round(stagger_cooldown) % 2 == 0) {
-                GetComponent<SpriteRenderer>().enabled = false;
-            } else {
-                GetComponent<SpriteRenderer>().enabled = true;
+            if (stagger_flash_cooldown <= 0) {
+                if (GetComponent<SpriteRenderer>().enabled == true){
+                    GetComponent<SpriteRenderer>().enabled = false;
+                } else {
+                    GetComponent<SpriteRenderer>().enabled = true;
+                }
+                stagger_flash_cooldown = stagger_flash_timer;
             }
             stagger_cooldown -= Time.deltaTime;
+            stagger_flash_cooldown -= Time.deltaTime;
         } else {
             stagger_cooldown = stagger_timer;
             gun.GetComponent<SpriteRenderer>().enabled = true;

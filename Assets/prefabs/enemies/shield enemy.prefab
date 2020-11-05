@@ -661,7 +661,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 20
+  m_Mass: 165
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -699,6 +699,10 @@ MonoBehaviour:
   weapon: {fileID: 7465845769327194402}
   chaseDis: 8
   lr: {fileID: 0}
+  stagger_timer: 10
+  stagger_cooldown: 0
+  stagger_flash_timer: 0.25
+  stagger_flash_cooldown: 0
 --- !u!114 &8957538140155503026
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -169,8 +169,8 @@ MonoBehaviour:
   barrel: {fileID: 1953896556}
   bullet_prefab: {fileID: 1407856483140768472, guid: 1664500f9ffe95d40b9a32ce7429d15b,
     type: 3}
-  clip: 6
-  ammo: 200
+  clip: 2
+  ammo: 120
   max_clip: 0
   weapon: shotgun
   damage: 12
@@ -761,6 +761,7 @@ GameObject:
   - component: {fileID: 939622074}
   - component: {fileID: 939622073}
   - component: {fileID: 939622078}
+  - component: {fileID: 939622079}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -1009,6 +1010,25 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &939622079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939622072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RootBone: {fileID: 0}
+  m_BoneTransforms: []
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_UseBatching: 1
+  m_AlwaysUpdate: 1
 --- !u!1 &1110212291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,7 +1198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACYn+uW7H/1TwIAAPIEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VEtz2jAQ/iuMzk3HxiGE3lpCSA8EJqSTiy/CWmMNsuTRI7yG/96VbGOHTk8s+327++1DPhMuTQWZVXquOVsoBuTHgHibfBt04Asc6FbJNT9By/ngzBaeRAPnjVqu0B/7MKNKsJpnP+VWeHKETid5rnQ5Y1uYKmMNunMqDCCklfXREl3nATngz93EhxzRGo69dUJrEg0uaGYgLeiO2hJbWs1yMhO0rIB5yR15OGzY8X2gSWymYXjhmRKCm0YJsccqdLquCtDgW2WcYmOhuqcXwLeF9Wn7scs8N2AbRZoen7jG+dRJyS9VD62kZlfL+qTC+TLD0UOQVCdd/IPfxQHOtSpf2rpx5GvYgme7N3rMqLG9qfbdT1+FO7mnYkc3Aj4KkK9qrpWTDEGrnQ91BoZP3d9ra9MCsl3nr6XeOF31/934Hi6h+8NU8HLjoe/3tWMtVBh32DxoXMxvFBzuwjQp0OtV/DHwTrf9A2qAZ66NRajpUnp5G+W0p5JZmJnvxtmp0hKCuxFdgaTCHleYxt6u8Abrlb1Bnql/Kk3xBmtfwE1IcHf8KLqBVmp/XZYp1H4Bplg6K7iETrQHXnFOUyVlfWH9mbRha6dzmvXCto6zr6dFHuMkYXG8iZJstJkkk7vxMIk3k9FjlIwj9pCMSLg9LrFPKla10GY8uDXZJZd4Z+0XZDDXtArXzjTdz/mpVH2BXOZqnWkAuaxTXJWDxir4KtmMcZzQGqzlMiycnFMiVLYDll5rpqHV2cFqmnZZUlLxT2W9JyXT8M1IyYVc/gJQSwMEFAAACAgAAJif6+uTh9RtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tJKFobFxiqFhkoFxsmmSpbGlrrmRsWGSpamFgbG5QYqZsalSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAJif65bsf/VPAgAA8gQAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAJif6+uTh9RtAAAAeAAAAAkAJAAAAAAAAAAAAAAAnAIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABUAwAAAAA=
+    dataString: UEsDBBQAAAgIAACQn+uW7H/1TwIAAPIEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VEtz2jAQ/iuMzk3HxiGE3lpCSA8EJqSTiy/CWmMNsuTRI7yG/96VbGOHTk8s+327++1DPhMuTQWZVXquOVsoBuTHgHibfBt04Asc6FbJNT9By/ngzBaeRAPnjVqu0B/7MKNKsJpnP+VWeHKETid5rnQ5Y1uYKmMNunMqDCCklfXREl3nATngz93EhxzRGo69dUJrEg0uaGYgLeiO2hJbWs1yMhO0rIB5yR15OGzY8X2gSWymYXjhmRKCm0YJsccqdLquCtDgW2WcYmOhuqcXwLeF9Wn7scs8N2AbRZoen7jG+dRJyS9VD62kZlfL+qTC+TLD0UOQVCdd/IPfxQHOtSpf2rpx5GvYgme7N3rMqLG9qfbdT1+FO7mnYkc3Aj4KkK9qrpWTDEGrnQ91BoZP3d9ra9MCsl3nr6XeOF31/934Hi6h+8NU8HLjoe/3tWMtVBh32DxoXMxvFBzuwjQp0OtV/DHwTrf9A2qAZ66NRajpUnp5G+W0p5JZmJnvxtmp0hKCuxFdgaTCHleYxt6u8Abrlb1Bnql/Kk3xBmtfwE1IcHf8KLqBVmp/XZYp1H4Bplg6K7iETrQHXnFOUyVlfWH9mbRha6dzmvXCto6zr6dFHuMkYXG8iZJstJkkk7vxMIk3k9FjlIwj9pCMSLg9LrFPKla10GY8uDXZJZd4Z+0XZDDXtArXzjTdz/mpVH2BXOZqnWkAuaxTXJWDxir4KtmMcZzQGqzlMiycnFMiVLYDll5rpqHV2cFqmnZZUlLxT2W9JyXT8M1IyYVc/gJQSwMEFAAACAgAAJCf6+uTh9RtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tJKFobFxiqFhkoFxsmmSpbGlrrmRsWGSpamFgbG5QYqZsalSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAJCf65bsf/VPAgAA8gQAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAJCf6+uTh9RtAAAAeAAAAAkAJAAAAAAAAAAAAAAAnAIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABUAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -2755,6 +2775,11 @@ PrefabInstance:
       propertyPath: hp
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1564545569910247738, guid: 546d44a4b5b5da14487b9853122d37fe,
+        type: 3}
+      propertyPath: stagger_flash_timer
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2419700507873993591, guid: 546d44a4b5b5da14487b9853122d37fe,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2769,6 +2794,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213725904747132187, guid: 546d44a4b5b5da14487b9853122d37fe,
+        type: 3}
+      propertyPath: m_Mass
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 4879723460864612250, guid: 546d44a4b5b5da14487b9853122d37fe,
         type: 3}
@@ -2833,6 +2863,11 @@ PrefabInstance:
     - target: {fileID: 6351523546583738184, guid: 546d44a4b5b5da14487b9853122d37fe,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766982660289177767, guid: 546d44a4b5b5da14487b9853122d37fe,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8704850055512791329, guid: 546d44a4b5b5da14487b9853122d37fe,
