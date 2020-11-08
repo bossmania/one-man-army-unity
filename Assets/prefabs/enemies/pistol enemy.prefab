@@ -74,6 +74,60 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &508088712515485486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4366467202736281269}
+  - component: {fileID: 5237112543760524730}
+  m_Layer: 5
+  m_Name: Gernade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4366467202736281269
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508088712515485486}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -234.18178}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2907999594835962067}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 61.00002}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5237112543760524730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508088712515485486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2559d64adb8e748bde8482037f5383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text_field: {fileID: 0}
+  trans: {fileID: 0}
+  player: {fileID: 6844363988676951269}
+  gernades: 1
+  gernade_prefab: {fileID: 4686620209237457046, guid: bcdfdb431eb526145b2296ae239d0830,
+    type: 3}
 --- !u!1 &2459071157562335169
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +522,7 @@ MonoBehaviour:
   stagger_cooldown: 0
   stagger_flash_timer: 0.25
   stagger_flash_cooldown: 0
+  gernade_scr: {fileID: 5237112543760524730}
 --- !u!114 &5301334982817116466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +633,7 @@ RectTransform:
   - {fileID: 8388709599807773922}
   - {fileID: 5023583419150850366}
   m_Father: {fileID: 2907999594835962067}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -711,6 +766,7 @@ RectTransform:
   m_LocalScale: {x: 0.011102485, y: 0.011102485, z: 0.011102485}
   m_Children:
   - {fileID: 429542124875437317}
+  - {fileID: 4366467202736281269}
   - {fileID: 7204616393519965842}
   m_Father: {fileID: 6844363988676951269}
   m_RootOrder: 1

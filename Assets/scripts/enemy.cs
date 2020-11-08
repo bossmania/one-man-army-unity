@@ -54,10 +54,6 @@ public class enemy : MonoBehaviour
         weapon.text = gun_scr.weapon;
     }
 
-    void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(trans.position, chaseDis);
-    }
-
     // Update is called once per frame
     void FixedUpdate() {
 
@@ -207,6 +203,11 @@ public class enemy : MonoBehaviour
                     if (gun_scr.ammo_text != null) {
                         gun_scr.ammo_text.set_ammo(gun_scr.clip, gun_scr.ammo, gun_scr.weapon);
                     }
+                }
+                if ((int)Random.Range(1, 10) == 1) {
+                    player_scr.gernade_scr.gernades += 1;
+                    player_scr.gernade_scr.set_gernade();
+                } else {
                 }
             }
             state = "deathState";

@@ -32,6 +32,8 @@ public class player : MonoBehaviour
     [System.NonSerialized] public List<string> weapons = new List<string>();
     public knife_scr knife_scr;
     public tase_scr tase_scr;
+    public gernade_scr gernade_scr;
+    public Transform trans;
 
     public string state;
 
@@ -78,10 +80,13 @@ public class player : MonoBehaviour
 
         if (is_freeze) {
             freeze -= freeze_remove * Time.deltaTime;
-
             foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("bullet")) {
                 bullet bullet_scr = bullet.GetComponent<bullet>();
                 bullet_scr.state = "freezeState";
+            }
+            foreach (GameObject gernade in GameObject.FindGameObjectsWithTag("gernade")) {
+                gernade_obj gernade_scr = gernade.GetComponent<gernade_obj>();
+                gernade_scr.state = "freezeState";
             }
         } else {
             foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("bullet")) {
@@ -132,39 +137,47 @@ public class player : MonoBehaviour
             changeWeapon();
         }
 
-        if (Input.GetButton("pistol")) {
+        if (Input.GetButton("pistol") || Input.GetAxisRaw("pistol") > 0) {
             weapon = 0;
             changeWeapon();
         }
 
-        if (Input.GetButton("assault rifle")) {
+        if (Input.GetButton("assault rifle") || Input.GetAxisRaw("assault rifle") < 0) {
             weapon = 1;
             changeWeapon();
         }
 
-        if (Input.GetButton("shotgun")) {
+        if (Input.GetButton("shotgun") || Input.GetAxisRaw("shotgun") > 0) {
             weapon = 2;
             changeWeapon();
         }
 
-        if (Input.GetButton("sniper")) {
+        if (Input.GetButton("sniper") || Input.GetAxisRaw("sniper") < 0) {
             weapon = 3;
             changeWeapon();
         }
 
-        mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 gun_pos = new Vector2(gun.position.x, gun.position.y);
-        Vector2 lookdir = mousepos - gun_pos;
-        rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
+        if ((Input.GetAxis("mouse x") != 0 || Input.GetAxis("mouse y") != 0)) {
+            mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 gun_pos = new Vector2(gun.position.x, gun.position.y);
+            Vector2 lookdir = mousepos - gun_pos;
+            rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
+        }
+
+        if ((Input.GetAxis("right x") != 0 || Input.GetAxis("right y") != 0)) {
+            Vector2 lookdir = new Vector2(Input.GetAxis("right x"), Input.GetAxis("right y"));
+            rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
+        }
+
         gun_scr.shoot_cooldown -= Time.deltaTime;
 
-        if (Input.GetButton("shoot")) {
+        if (Input.GetButton("shoot") || Input.GetAxisRaw("shoot") > 0) {
             if (can_shoot) {
                 gun_scr.shoot();
             }
         }
 
-        if (Input.GetButton("aim")) {
+        if (Input.GetButton("aim") || Input.GetAxisRaw("aim") < 0) {
             if (can_shoot) {
                 lr.enabled = true;
                 RaycastHit2D hit = Physics2D.Raycast(barrel.position, barrel.TransformDirection(Vector2.up), Mathf.Infinity, Physics2D.DefaultRaycastLayers, -5, 5);
@@ -190,7 +203,8 @@ public class player : MonoBehaviour
                 lr.enabled = false;
             }
         }
-        if (Input.GetButtonUp("aim")) {
+
+        if (Input.GetButtonUp("aim") || Input.GetAxisRaw("aim") == 0) {
             lr.enabled = false;
             cam.orthographicSize = 8.83f;
         }
@@ -224,7 +238,20 @@ public class player : MonoBehaviour
                     enemy enemy_scr = enemy.GetComponent<enemy>();
                     enemy_scr.state = "lastState";
                 }
+
+                foreach (GameObject gernade in GameObject.FindGameObjectsWithTag("gernade")) {
+                    gernade_obj gernade_scr = gernade.GetComponent<gernade_obj>();
+                    gernade_scr.state = "unfreezeState";
+                }
             }
+        }
+
+        if (Input.GetButtonDown("gernade")) {
+            gernade_scr.throw_gernade();
+        }
+
+        if (Input.GetButtonDown("pause")) {
+            Debug.Log("paused");
         }
     }
 
