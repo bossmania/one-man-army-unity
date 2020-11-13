@@ -7,26 +7,28 @@ public class gernade_scr : MonoBehaviour
 {
     public Text Text_field;
     public Transform trans;
-    public Transform player;
+    public Transform player_obj;
+    public player player_scr;
     public int gernades = 1;
     public GameObject gernade_prefab;
 
-    void Start() {
-        trans = GetComponent<Transform>();
-        player = trans.parent.parent;
-        trans.position = new Vector3(player.position.x, trans.position.y, trans.position.z);
-    }
-
     public void set_gernade() {
         Text_field.text =  "Grenade: "+ gernades.ToString();
-        trans.position = new Vector3(player.position.x, trans.position.y, trans.position.z);
+        trans.position = new Vector3(player_obj.position.x, trans.position.y, trans.position.z);
+        set_gernade();
     }
 
     public void throw_gernade() {
         if (gernades > 0) {
-            Instantiate(gernade_prefab, player.position+new Vector3(0.5f, 0, 0), player.rotation);
+            Instantiate(gernade_prefab, player_scr.barrel.position, player_obj.rotation);
             gernades -= 1;
             set_gernade();
         }
+    }
+
+    void Start() {
+        trans = GetComponent<Transform>();
+        player_obj = trans.parent.parent;
+        trans.position = new Vector3(player_obj.position.x, trans.position.y, trans.position.z);
     }
 }

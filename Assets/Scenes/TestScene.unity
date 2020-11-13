@@ -1217,8 +1217,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text_field: {fileID: 1135020536}
   trans: {fileID: 1135020534}
-  player: {fileID: 939622077}
-  gernades: 1
+  player_obj: {fileID: 939622077}
+  player_scr: {fileID: 939622073}
+  gernades: 2
   gernade_prefab: {fileID: 4686620209237457046, guid: bcdfdb431eb526145b2296ae239d0830,
     type: 3}
 --- !u!114 &1135020536
@@ -1840,15 +1841,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: pistol enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 5023583419150850366, guid: 3b01adf5496cd0f459470c203e905458,
+    - target: {fileID: 4977012896522087512, guid: 3b01adf5496cd0f459470c203e905458,
         type: 3}
-      propertyPath: m_AnchorMax.x
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5023583419150850366, guid: 3b01adf5496cd0f459470c203e905458,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023583419150850366, guid: 3b01adf5496cd0f459470c203e905458,
+        type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
         type: 3}
@@ -1904,6 +1910,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421810436818579322, guid: 3b01adf5496cd0f459470c203e905458,
+        type: 3}
+      propertyPath: state
+      value: chaseState
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b01adf5496cd0f459470c203e905458, type: 3}

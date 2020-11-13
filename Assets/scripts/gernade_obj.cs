@@ -49,7 +49,11 @@ public class gernade_obj : MonoBehaviour
     }
 
     void unfreezeState() {
-        rb.velocity = velocity;
+        if (velocity == Vector2.zero) {
+            rb.AddForce(trans.right*100, ForceMode2D.Force);
+        } else {
+            rb.velocity = velocity;
+        }
         state = "moveState";
     }
 }
