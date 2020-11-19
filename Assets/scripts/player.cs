@@ -29,13 +29,17 @@ public class player : MonoBehaviour
     public gun_scr gun_scr;
     public Transform guns;
     public float weapon = 0;
-    [System.NonSerialized] public List<string> weapons = new List<string>();
+    public List<string> weapons = new List<string>();
     public knife_scr knife_scr;
     public tase_scr tase_scr;
     public gernade_scr gernade_scr;
     public Transform trans;
-
+    public GameObject paused;
     public string state;
+    public float knockback_timer;
+    public float knockback_cooldown;
+    public bool knockback = false;
+    public Vector3 knockback_dir;
 
     Vector2 move;
     Vector2 mousepos;
@@ -57,6 +61,7 @@ public class player : MonoBehaviour
     {
         hp = max_hp;
         freeze = max_freeze;
+        knockback_cooldown = knockback_timer;
         freeze_bar.set_max_freeze(max_freeze);
         hp_bar.set_max_hp(max_hp);
 
@@ -108,7 +113,7 @@ public class player : MonoBehaviour
 
             foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
                 enemy enemy_scr = enemy.GetComponent<enemy>();
-                enemy_scr.state = "lastState";
+                enemy_scr.state = "chaseState";
             }
         }
 
@@ -120,6 +125,15 @@ public class player : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + move * spd * Time.fixedDeltaTime);
+        if (knockback) {
+            if (knockback_timer >= 0) {
+                trans.position += (knockback_dir*10) * Time.deltaTime;
+                knockback_timer -= Time.deltaTime;
+            } else {
+                knockback_timer = knockback_cooldown;
+                knockback = false;
+            }
+        }
     }
 
     void moveState() {
@@ -236,7 +250,7 @@ public class player : MonoBehaviour
 
                 foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
                     enemy enemy_scr = enemy.GetComponent<enemy>();
-                    enemy_scr.state = "lastState";
+                    enemy_scr.state = "chaseState";
                 }
 
                 foreach (GameObject gernade in GameObject.FindGameObjectsWithTag("gernade")) {
@@ -251,7 +265,7 @@ public class player : MonoBehaviour
         }
 
         if (Input.GetButtonDown("pause")) {
-            Debug.Log("paused");
+            Instantiate(paused);
         }
     }
 
@@ -266,4 +280,12 @@ public class player : MonoBehaviour
         }
     }
 
+    public void punch(Vector3 info) {
+        if (hp > 0) {
+        hp -= info.z;
+        }
+        knockback_dir = (trans.position-new Vector3(info.x, info.y, 0f));
+        knockback = true;
+        // rb.AddForce(((trans.position-new Vector3(info.x, info.y, 0f)) * 20000), ForceMode2D.Force);
+    }
 }

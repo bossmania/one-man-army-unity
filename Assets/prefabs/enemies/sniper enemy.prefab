@@ -820,14 +820,13 @@ MonoBehaviour:
   max_hp: 4060
   hp: 0
   hp_bar: {fileID: 5082733237165311384}
-  state: wanderState
+  state: chaseState
   rb: {fileID: 3419678599132612612}
   gun: {fileID: 728362581687420168}
   gun_scr: {fileID: 6580713329409374046}
   target: {fileID: 0}
   desSetter: {fileID: 2397128277750513388}
   aipath: {fileID: 4700426179126897251}
-  follow_me: {fileID: 0}
   player: {fileID: 0}
   player_scr: {fileID: 0}
   weapon: {fileID: 3816948679601549119}

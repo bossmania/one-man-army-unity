@@ -124,7 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text_field: {fileID: 0}
   trans: {fileID: 0}
-  player: {fileID: 6844363988676951269}
+  player_obj: {fileID: 0}
+  player_scr: {fileID: 0}
   gernades: 1
   gernade_prefab: {fileID: 4686620209237457046, guid: bcdfdb431eb526145b2296ae239d0830,
     type: 3}
@@ -505,14 +506,13 @@ MonoBehaviour:
   max_hp: 50
   hp: 0
   hp_bar: {fileID: 7473645705240807854}
-  state: wanderState
+  state: chaseState
   rb: {fileID: 1274433944930458520}
   gun: {fileID: 2563221877088785584}
   gun_scr: {fileID: 7445775918131082150}
   target: {fileID: 0}
   desSetter: {fileID: 5749101339671014088}
   aipath: {fileID: 7879305929670238342}
-  follow_me: {fileID: 0}
   player: {fileID: 0}
   player_scr: {fileID: 0}
   weapon: {fileID: 5927214594476515746}
@@ -522,7 +522,6 @@ MonoBehaviour:
   stagger_cooldown: 0
   stagger_flash_timer: 0.25
   stagger_flash_cooldown: 0
-  gernade_scr: {fileID: 5237112543760524730}
 --- !u!114 &5301334982817116466
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -817,11 +817,17 @@ MonoBehaviour:
   gun_scr: {fileID: 1959469123}
   guns: {fileID: 445657002}
   weapon: 0
+  weapons: []
   knife_scr: {fileID: 1931074475}
   tase_scr: {fileID: 1741515678}
   gernade_scr: {fileID: 1135020535}
   trans: {fileID: 939622077}
+  paused: {fileID: 2248905726572033991, guid: b20844b255925d54d8652fbcdd3d87fc, type: 3}
   state: moveState
+  knockback_timer: 1
+  knockback_cooldown: 0
+  knockback: 0
+  knockback_dir: {x: 0, y: 0, z: 0}
 --- !u!50 &939622074
 Rigidbody2D:
   serializedVersion: 4
@@ -1829,95 +1835,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607461315}
   m_CullTransparentMesh: 0
---- !u!1001 &1611174182
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4977012896522087512, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_Name
-      value: pistol enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4977012896522087512, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5023583419150850366, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5023583419150850366, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.8012436
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844363988676951269, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7421810436818579322, guid: 3b01adf5496cd0f459470c203e905458,
-        type: 3}
-      propertyPath: state
-      value: chaseState
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3b01adf5496cd0f459470c203e905458, type: 3}
 --- !u!1 &1638241931
 GameObject:
   m_ObjectHideFlags: 0

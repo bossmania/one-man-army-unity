@@ -17,7 +17,6 @@ public class enemy : MonoBehaviour
     public Transform target;
     public AIDestinationSetter desSetter;
     public AIPath aipath;
-    public Transform follow_me;
     public Transform player;
     public player player_scr;
     public Text weapon;
@@ -34,21 +33,16 @@ public class enemy : MonoBehaviour
         hp = max_hp;
         hp_bar.set_max_hp(max_hp);
         stagger_cooldown = stagger_timer;
-
-        follow_me = GameObject.Find("follow me").GetComponent<Transform>();
         player = GameObject.Find("player").GetComponent<Transform>();
         player_scr = GameObject.Find("player").GetComponent<player>();
 
         if (lr != null) {
             lr.enabled = false;
         }
-
-        if (state == "wanderState") {
-            float xx = Random.Range(-16.74f, 14.38f);
-            float yy = Random.Range(-9.16f, 6.57f);
-            follow_me.position = new Vector2(xx, yy);
-            target = follow_me;
-            aipath.endReachedDistance = 1f;
+        if (gun_scr.weapon == "sniper") {
+            aipath.endReachedDistance = 10;
+        } else {
+            aipath.endReachedDistance = 5;
         }
 
         weapon.text = gun_scr.weapon;
@@ -73,32 +67,6 @@ public class enemy : MonoBehaviour
 
 
         hp_bar.set_hp(hp);
-    }
-
-    public void wanderState() {
-        desSetter.target = target;
-        Vector2 dir = aipath.steeringTarget - trans.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        trans.rotation = Quaternion.Euler(0, 0, angle);
-
-        if ((trans.position - player.position).magnitude < chaseDis) {
-            state = "chaseState";
-            target = player;
-            if (gun_scr.weapon == "sniper") {
-                aipath.endReachedDistance = 10;
-            } else {
-                aipath.endReachedDistance = 5;
-            }
-        }
-
-        if (aipath.reachedEndOfPath) {
-            float xx = Random.Range(-16.74f, 14.38f);
-            float yy = Random.Range(-9.16f, 6.57f);
-            follow_me.position = new Vector2(xx, yy);
-            target = follow_me;
-            aipath.endReachedDistance = 1f;
-        }
-
     }
 
     public void chaseState() {
@@ -127,15 +95,6 @@ public class enemy : MonoBehaviour
 
     public void freezeState() {
         aipath.canMove = false;
-    }
-
-    public void lastState() {
-        aipath.canMove = true;
-        if (target == follow_me) {
-            state = "wanderState";
-        } else if (target == player) {
-            state = "chaseState";
-        }
     }
 
     public void deathState() {
@@ -174,11 +133,6 @@ public class enemy : MonoBehaviour
         if (state != "freezeState" & state != "chaseState") {
             state = "chaseState";
             target = player;
-            if (gun_scr.weapon == "sniper") {
-                aipath.endReachedDistance = 10;
-            } else {
-                aipath.endReachedDistance = 5;
-            }
         }
     }
     public void takeKnifeDamage(float damage) {
@@ -197,11 +151,11 @@ public class enemy : MonoBehaviour
         }
         if (state == "staggerState") {
             foreach (Transform child in player_scr.guns) {
-                gun_scr = child.GetComponent<gun_scr>();
-                gun_scr.ammo += gun_scr.max_clip;
+                gun_scr player_gun_scr = child.GetComponent<gun_scr>();
+                player_gun_scr.ammo += player_gun_scr.max_clip;
                 if (child.name == player_scr.weapons[(int)player_scr.weapon]) {
-                    if (gun_scr.ammo_text != null) {
-                        gun_scr.ammo_text.set_ammo(gun_scr.clip, gun_scr.ammo, gun_scr.weapon);
+                    if (player_gun_scr.ammo_text != null) {
+                        player_gun_scr.ammo_text.set_ammo(player_gun_scr.clip, player_gun_scr.ammo, player_gun_scr.weapon);
                     }
                 }
                 if ((int)Random.Range(1, 10) == 1) {
