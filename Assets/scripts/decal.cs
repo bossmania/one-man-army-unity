@@ -8,4 +8,8 @@ public class decal : MonoBehaviour
     public void takeDamage() {
 
     }
+
+    public void punch() {
+
+    }
 }

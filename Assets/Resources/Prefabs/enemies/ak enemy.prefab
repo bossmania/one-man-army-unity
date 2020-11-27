@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2419700507873993591}
   - component: {fileID: 8366160700192347397}
   - component: {fileID: 1014286269252383876}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,8 +143,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2011724891
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6e9067ead8184ed488ec32e5e1d3b081, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 1211218078215628338}
   - component: {fileID: 5450361378250917901}
   - component: {fileID: 552733720023292612}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: gui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 2011724891
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &4665640628432116487
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 2861411465774950106}
   - component: {fileID: 3969034281248461344}
   - component: {fileID: 6766982660289177767}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 6171644042063786523}
   - component: {fileID: 6454558575317624229}
   - component: {fileID: 5000455517167761543}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6351523546583738184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.9, y: 2, z: -0.8012436}
+  m_LocalPosition: {x: 4.9, y: 2, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 718316268084017175}
@@ -653,8 +653,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2011724891
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1b75bd4bc2db7c4c8f4619dfd19737c, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 3005601293632343508}
   - component: {fileID: 1960651890882105925}
   - component: {fileID: 1300912853515064951}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}

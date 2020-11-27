@@ -24,12 +24,17 @@ public class brawler : MonoBehaviour
     public float stagger_cooldown;
     public float stagger_flash_timer = 0.25f;
     public float stagger_flash_cooldown;
+    public float knockback_timer;
+    public float knockback_cooldown;
+    public bool knockback = false;
+    public Vector3 knockback_dir;
 
 
     // Start is called before the first frame update
     void Start() {
         hp = max_hp;
         hp_bar.set_max_hp(max_hp);
+        knockback_cooldown = knockback_timer;
         stagger_cooldown = stagger_timer;
         player = GameObject.Find("player").GetComponent<Transform>();
         player_scr = GameObject.Find("player").GetComponent<player>();
@@ -43,7 +48,15 @@ public class brawler : MonoBehaviour
         if (state != "null") {
             Invoke(state, 0f);
         }
-
+        if (knockback) {
+            if (knockback_timer >= 0) {
+                trans.position += (knockback_dir*10) * Time.deltaTime;
+                knockback_timer -= Time.deltaTime;
+            } else {
+                knockback_timer = knockback_cooldown;
+                knockback = false;
+            }
+        }
 
         if (hp <= (max_hp*0.2) & state != "freezeState" & state != "staggerState") {
             state = "staggerState";
@@ -113,6 +126,15 @@ public class brawler : MonoBehaviour
             target = player;
         }
     }
+
+    public void punch(Vector3 info) {
+        if (hp > 0) {
+        hp -= info.z;
+        }
+        knockback_dir = (trans.position-new Vector3(info.x, info.y, 0f));
+        knockback = true;
+    }
+
     public void takeKnifeDamage(float damage) {
         if (hp > 0) {
             hp -= damage;

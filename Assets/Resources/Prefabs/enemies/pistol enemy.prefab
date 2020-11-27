@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8388709599807773922}
   - component: {fileID: 3336032675803392651}
   - component: {fileID: 4105870319150984427}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4366467202736281269}
   - component: {fileID: 5237112543760524730}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Gernade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 8780266691940385139}
   - component: {fileID: 5927214594476515746}
   - component: {fileID: 2128965366634634804}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,8 +324,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2011724891
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6e9067ead8184ed488ec32e5e1d3b081, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -395,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4977012896522087512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.9, y: 2, z: -0.8012436}
+  m_LocalPosition: {x: 4.9, y: 2, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2563221877088785584}
@@ -439,8 +439,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2011724891
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1b75bd4bc2db7c4c8f4619dfd19737c, type: 3}
   m_Color: {r: 0.011764707, g: 0.4901961, b: 0, a: 1}
@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 7204616393519965842}
   - component: {fileID: 3904389949070177154}
   - component: {fileID: 7473645705240807854}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 3689050316680210781}
   - component: {fileID: 7897249953418779633}
   - component: {fileID: 3202032767388529936}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: gui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +793,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 2011724891
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7561573735647876565
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 5023583419150850366}
   - component: {fileID: 941303491182426431}
   - component: {fileID: 8629468810890897809}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

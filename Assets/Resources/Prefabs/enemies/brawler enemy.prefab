@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2197034426200471468}
   - component: {fileID: 1070869472856556374}
   - component: {fileID: 7215205697460828625}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2956531611133785924}
   - component: {fileID: 8244748899775076731}
   - component: {fileID: 4495469671094094770}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: gui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 2011724891
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &8752471909797907057
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 1755323517725585921}
   - component: {fileID: 5607609831768261747}
   - component: {fileID: 4025055084921316850}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 1188567435392605346}
   - component: {fileID: 2521183716533633843}
   - component: {fileID: 3154046839557457665}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7056450918595851838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.9, y: 2, z: -0.8012436}
+  m_LocalPosition: {x: 4.9, y: 2, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3432271179866735914}
@@ -455,8 +455,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2011724891
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1b75bd4bc2db7c4c8f4619dfd19737c, type: 3}
   m_Color: {r: 1, g: 0.82208174, b: 0.2783019, a: 1}
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 7813389337040216941}
   - component: {fileID: 6943314127247340755}
   - component: {fileID: 8983984674626365937}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

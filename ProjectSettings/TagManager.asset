@@ -19,7 +19,7 @@ TagManager:
   - 
   - 
   - enviorment
-  - 
+  - objs
   - 
   - 
   - 
@@ -45,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: tile
+    uniqueID: 21687079
+    locked: 0
+  - name: objs
+    uniqueID: 2011724891
     locked: 0

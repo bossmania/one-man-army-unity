@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5477634333900280307}
   - component: {fileID: 7465845769327194402}
   - component: {fileID: 2906558809223515828}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 2994677653806713558}
   - component: {fileID: 2994677653806713559}
   - component: {fileID: 2994677653806713545}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,8 +153,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2994677653806713557}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.671, y: 0.162, z: 0.49}
-  m_LocalScale: {x: 0.24438763, y: 0.916256, z: 1}
+  m_LocalPosition: {x: 0.506, y: 0.286, z: 0.49}
+  m_LocalScale: {x: 0.13418166, y: 0.4203278, z: 1}
   m_Children: []
   m_Father: {fileID: 7719628971117227109}
   m_RootOrder: 2
@@ -195,8 +195,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2011724891
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 06717d8eb0b3c734d9c388d6f132d963, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -226,7 +226,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 3, y: 3}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 4735288174054640738}
   - component: {fileID: 1987856987287353867}
   - component: {fileID: 947807764342733931}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 8100546287513258430}
   - component: {fileID: 4093103452011522495}
   - component: {fileID: 4764730646963157265}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 499779545635043805}
   - component: {fileID: 6360520367981595505}
   - component: {fileID: 1851637748374152592}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: gui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 2011724891
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6714209884749301077
@@ -574,7 +574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8127967853076659416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.9, y: -0.76, z: -0.8012436}
+  m_LocalPosition: {x: 9.9, y: -0.76, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1607738722255766576}
@@ -619,8 +619,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2011724891
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1b75bd4bc2db7c4c8f4619dfd19737c, type: 3}
   m_Color: {r: 0.011764707, g: 0.4901961, b: 0, a: 1}
@@ -849,8 +849,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2011724891
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6e9067ead8184ed488ec32e5e1d3b081, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 6207720736994866706}
   - component: {fileID: 284461894893298434}
   - component: {fileID: 5938568151117699374}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

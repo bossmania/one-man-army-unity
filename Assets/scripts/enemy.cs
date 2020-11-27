@@ -26,12 +26,17 @@ public class enemy : MonoBehaviour
     public float stagger_cooldown;
     public float stagger_flash_timer = 0.25f;
     public float stagger_flash_cooldown;
+    public float knockback_timer;
+    public float knockback_cooldown;
+    public bool knockback = false;
+    public Vector3 knockback_dir;
 
 
     // Start is called before the first frame update
     void Start() {
         hp = max_hp;
         hp_bar.set_max_hp(max_hp);
+        knockback_cooldown = knockback_timer;
         stagger_cooldown = stagger_timer;
         player = GameObject.Find("player").GetComponent<Transform>();
         player_scr = GameObject.Find("player").GetComponent<player>();
@@ -55,6 +60,15 @@ public class enemy : MonoBehaviour
             Invoke(state, 0f);
         }
 
+        if (knockback) {
+            if (knockback_timer >= 0) {
+                trans.position += (knockback_dir*10) * Time.deltaTime;
+                knockback_timer -= Time.deltaTime;
+            } else {
+                knockback_timer = knockback_cooldown;
+                knockback = false;
+            }
+        }
 
         if (hp <= (max_hp*0.2) & state != "freezeState" & state != "staggerState") {
             state = "staggerState";

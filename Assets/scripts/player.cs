@@ -200,7 +200,7 @@ public class player : MonoBehaviour
                 if (hit.collider != null) {
                     pos.Add(hit.point);
                 } else {
-                    pos.Add(mousepos);
+                    pos.Add(barrel.TransformDirection(Vector2.up).normalized * 1000);
                 }
                 lr.startColor = Color.red;
                 lr.endColor = Color.red;
@@ -240,17 +240,27 @@ public class player : MonoBehaviour
                 is_freeze = true;
                 filter.enabled = true;
 
-                foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
-                    enemy enemy_scr = enemy.GetComponent<enemy>();
-                    enemy_scr.state = "freezeState";
+                foreach (GameObject enemy_obj in GameObject.FindGameObjectsWithTag("enemy")) {
+                    enemy enemy_scr = enemy_obj.GetComponent<enemy>();
+                    if (enemy_scr == null) {
+                        brawler brawler_scr = enemy_obj.GetComponent<brawler>();
+                        brawler_scr.state = "freezeState";
+                    } else {
+                        enemy_scr.state = "freezeState";
+                    }
                 }
             } else {
                 is_freeze = false;
                 filter.enabled = false;
 
-                foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
-                    enemy enemy_scr = enemy.GetComponent<enemy>();
-                    enemy_scr.state = "chaseState";
+                foreach (GameObject enemy_obj in GameObject.FindGameObjectsWithTag("enemy")) {
+                    enemy enemy_scr = enemy_obj.GetComponent<enemy>();
+                    if (enemy_scr == null) {
+                        brawler brawler_scr = enemy_obj.GetComponent<brawler>();
+                        brawler_scr.state = "chaseState";
+                    } else {
+                        enemy_scr.state = "chaseState";
+                    }
                 }
 
                 foreach (GameObject gernade in GameObject.FindGameObjectsWithTag("gernade")) {
@@ -286,6 +296,5 @@ public class player : MonoBehaviour
         }
         knockback_dir = (trans.position-new Vector3(info.x, info.y, 0f));
         knockback = true;
-        // rb.AddForce(((trans.position-new Vector3(info.x, info.y, 0f)) * 20000), ForceMode2D.Force);
     }
 }
