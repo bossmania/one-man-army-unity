@@ -280,8 +280,14 @@ public class player : MonoBehaviour
     }
 
     void deathState() {
-        Destroy(gameObject);
+        // Destroy(gameObject);
         filter.enabled = false;
+        lr.enabled = false;
+    }
+
+    void cutsceneState() {
+        filter.enabled = false;
+        lr.enabled = false;
     }
 
     public void takeDamage(float damage) {
@@ -295,6 +301,7 @@ public class player : MonoBehaviour
         hp -= info.z;
         }
         knockback_dir = (trans.position-new Vector3(info.x, info.y, 0f));
+        knockback_dir.z = 0f;
         knockback = true;
     }
 }

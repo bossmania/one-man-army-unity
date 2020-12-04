@@ -86,9 +86,11 @@ public class brawler : MonoBehaviour
 
     public void deathState() {
         desSetter.target = null;
+        aipath.canMove = false;
         Debug.Log("Im Dead, lol");
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
+
 
     public void staggerState() {
         aipath.canMove = false;
@@ -114,7 +116,6 @@ public class brawler : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col) {
         Vector3 info = new Vector3(trans.position.x, trans.position.y, damage);
         col.gameObject.transform.gameObject.SendMessage("punch", info);
-        Debug.Log("hit him");
     }
 
     public void takeDamage(float damage) {
@@ -132,6 +133,7 @@ public class brawler : MonoBehaviour
         hp -= info.z;
         }
         knockback_dir = (trans.position-new Vector3(info.x, info.y, 0f));
+        knockback_dir.z = 0f;
         knockback = true;
     }
 

@@ -153,8 +153,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2994677653806713557}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.506, y: 0.286, z: 0.49}
-  m_LocalScale: {x: 0.13418166, y: 0.4203278, z: 1}
+  m_LocalPosition: {x: 0.6127, y: 0.1274, z: 0.49}
+  m_LocalScale: {x: 0.055048943, y: 0.31456444, z: 1}
   m_Children: []
   m_Father: {fileID: 7719628971117227109}
   m_RootOrder: 2
@@ -702,6 +702,10 @@ MonoBehaviour:
   stagger_cooldown: 0
   stagger_flash_timer: 0.25
   stagger_flash_cooldown: 0
+  knockback_timer: 0
+  knockback_cooldown: 0
+  knockback: 0
+  knockback_dir: {x: 0, y: 0, z: 0}
 --- !u!114 &8957538140155503026
 MonoBehaviour:
   m_ObjectHideFlags: 0

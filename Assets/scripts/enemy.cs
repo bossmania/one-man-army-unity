@@ -113,8 +113,9 @@ public class enemy : MonoBehaviour
 
     public void deathState() {
         desSetter.target = null;
+        aipath.canMove = false;
         Debug.Log("Im Dead, lol");
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 
     public void staggerState() {
@@ -180,5 +181,13 @@ public class enemy : MonoBehaviour
             }
             state = "deathState";
         }
+    }
+    public void punch(Vector3 info) {
+        if (hp > 0) {
+        hp -= info.z;
+        }
+        knockback_dir = (trans.position-new Vector3(info.x, info.y, 0f));
+        knockback_dir.z = 0f;
+        knockback = true;
     }
 }
