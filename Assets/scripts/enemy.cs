@@ -30,6 +30,7 @@ public class enemy : MonoBehaviour
     public float knockback_cooldown;
     public bool knockback = false;
     public Vector3 knockback_dir;
+    public bool dead = false;
 
 
     // Start is called before the first frame update
@@ -70,17 +71,28 @@ public class enemy : MonoBehaviour
             }
         }
 
-        if (hp <= (max_hp*0.2) & state != "freezeState" & state != "staggerState") {
+        if (hp <= (max_hp*0.2) & state != "freezeState" & state != "staggerState" & state !="cutsceneState" & state != "deathState") {
             state = "staggerState";
         }
 
-        if (hp <= 0 & state != "freezeState") {
+        if (hp <= 0 & state != "freezeState" & state !="cutsceneState" & state != "deathState") {
             hp = 0;
             state = "deathState";
         }
 
 
+        if (player_scr.state == "deathState") {
+            state = "cutsceneState";
+        }
+
         hp_bar.set_hp(hp);
+    }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        // Debug.Log(col.gameObject.name);
+        if (knockback && (col.gameObject.name != "brawler enemy" && col.gameObject.name != "bullet")) {
+            knockback = false;
+        }
     }
 
     public void chaseState() {
@@ -89,7 +101,7 @@ public class enemy : MonoBehaviour
         desSetter.target = target;
         Vector2 dir = target.position - trans.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        trans.rotation = Quaternion.Euler(0, 0, angle);
+        trans.rotation = Quaternion.Slerp(trans.rotation, Quaternion.Euler(0, 0, angle), 0.08f);
 
         if (lr != null) {
             lr.enabled = true;
@@ -111,10 +123,23 @@ public class enemy : MonoBehaviour
         aipath.canMove = false;
     }
 
+    public void cutsceneState() {
+        aipath.canMove = false;
+        if (lr != null) {
+            lr.enabled = false;
+        }
+    }
+
     public void deathState() {
         desSetter.target = null;
         aipath.canMove = false;
+        knockback = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        player_scr.xp += 10;
+        hp = 0;
+        dead = true;
         Debug.Log("Im Dead, lol");
+        state = "cutsceneState";
         // Destroy(gameObject);
     }
 
@@ -156,6 +181,7 @@ public class enemy : MonoBehaviour
         }
         if (state == "staggerState") {
             player_scr.hp += 20f;
+            player_scr.xp += 10;
             state = "deathState";
         }
     }
@@ -165,6 +191,7 @@ public class enemy : MonoBehaviour
             hp -= damage;
         }
         if (state == "staggerState") {
+            player_scr.xp += 10;
             foreach (Transform child in player_scr.guns) {
                 gun_scr player_gun_scr = child.GetComponent<gun_scr>();
                 player_gun_scr.ammo += player_gun_scr.max_clip;

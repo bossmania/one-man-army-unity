@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class player : MonoBehaviour
 {
@@ -40,6 +41,11 @@ public class player : MonoBehaviour
     public float knockback_cooldown;
     public bool knockback = false;
     public Vector3 knockback_dir;
+    public int xp = 0;
+    public int max_xp = 10;
+    public int upgradePoints = 0;
+    public int level = 1;
+    public saveSystem saveSystemController = new saveSystem();
 
     Vector2 move;
     Vector2 mousepos;
@@ -62,14 +68,43 @@ public class player : MonoBehaviour
         hp = max_hp;
         freeze = max_freeze;
         knockback_cooldown = knockback_timer;
-        freeze_bar.set_max_freeze(max_freeze);
-        hp_bar.set_max_hp(max_hp);
 
         foreach (Transform child in guns) {
             weapons.Add(child.name);
         }
 
         changeWeapon();
+
+        saveSystemController.setPath(Path.Combine(Application.persistentDataPath, "player.data"));
+
+        if (saveSystemController.checkSaveFile()) {
+            playerData data = saveSystemController.loadPlayer();
+            max_hp = data.max_hp;
+            hp = data.hp;
+            max_freeze = data.max_freeze;
+            freeze = data.freeze;
+            xp = data.xp;
+            max_xp = data.max_xp;
+            upgradePoints = data.upgradePoints;
+            level = data.level;
+
+            foreach (Transform child in guns)  {
+                if (child.name == "pistol") {
+                    child.GetComponent<gun_scr>().ammo = data.pistol_ammo;
+                } else if (child.name == "assault rifle") {
+                    child.GetComponent<gun_scr>().ammo = data.ak_ammo;
+                } else if (child.name == "shotgun") {
+                    child.GetComponent<gun_scr>().ammo = data.shotgun_ammo;
+                } else if (child.name == "sniper") {
+                    child.GetComponent<gun_scr>().ammo = data.sniper_ammo;
+                }
+            }
+        } else {
+            saveSystemController.savePlayer(this);
+        }
+
+        freeze_bar.set_max_freeze(max_freeze);
+        hp_bar.set_max_hp(max_hp);
     }
 
     // Update is called once per frame
@@ -111,9 +146,14 @@ public class player : MonoBehaviour
             is_freeze = false;
             filter.enabled = false;
 
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
-                enemy enemy_scr = enemy.GetComponent<enemy>();
-                enemy_scr.state = "chaseState";
+            foreach (GameObject enemy_obj in GameObject.FindGameObjectsWithTag("enemy")) {
+                enemy enemy_scr = enemy_obj.GetComponent<enemy>();
+                if (enemy_scr == null) {
+                    brawler brawler_scr = enemy_obj.GetComponent<brawler>();
+                    brawler_scr.state = "chaseState";
+                } else {
+                    enemy_scr.state = "chaseState";
+                }
             }
         }
 
@@ -133,6 +173,12 @@ public class player : MonoBehaviour
                 knockback_timer = knockback_cooldown;
                 knockback = false;
             }
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        if (knockback && (col.gameObject.name != "brawler enemy" && col.gameObject.name != "bullet")) {
+            knockback = false;
         }
     }
 
@@ -277,12 +323,28 @@ public class player : MonoBehaviour
         if (Input.GetButtonDown("pause")) {
             Instantiate(paused);
         }
+
+        if (xp >= max_xp) {
+            upgradePoints++;
+            max_xp = xp+10;
+            xp = xp - max_xp;
+            if (xp < 0) {
+                xp = 0;
+            }
+        }
+        Debug.Log(xp);
+        Debug.Log(max_xp);
+        Debug.Log(upgradePoints);
+        Debug.Log("-------------------------------------------------------------");
     }
 
     void deathState() {
-        // Destroy(gameObject);
+        GetComponent<SpriteRenderer>().enabled = false;
         filter.enabled = false;
         lr.enabled = false;
+        knockback = false;
+        move = new Vector2(0, 0);
+        // Destroy(gameObject);
     }
 
     void cutsceneState() {

@@ -28,6 +28,7 @@ public class brawler : MonoBehaviour
     public float knockback_cooldown;
     public bool knockback = false;
     public Vector3 knockback_dir;
+    public bool dead = true;
 
 
     // Start is called before the first frame update
@@ -58,15 +59,18 @@ public class brawler : MonoBehaviour
             }
         }
 
-        if (hp <= (max_hp*0.2) & state != "freezeState" & state != "staggerState") {
+        if (hp <= (max_hp*0.2) & state != "freezeState" & state != "staggerState" & state !="cutsceneState" & state != "deathState") {
             state = "staggerState";
         }
 
-        if (hp <= 0 & state != "freezeState") {
+        if (hp <= 0 & state != "freezeState" & state !="cutsceneState" & state != "deathState") {
             hp = 0;
             state = "deathState";
         }
 
+        if (player_scr.state == "deathState") {
+            state = "cutsceneState";
+        }
 
         hp_bar.set_hp(hp);
     }
@@ -77,17 +81,26 @@ public class brawler : MonoBehaviour
         desSetter.target = target;
         Vector2 dir = target.position - trans.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        trans.rotation = Quaternion.Euler(0, 0, angle);
+        trans.rotation = Quaternion.Slerp(trans.rotation, Quaternion.Euler(0, 0, angle), 0.08f);
     }
 
     public void freezeState() {
         aipath.canMove = false;
     }
 
+    public void cutsceneState() {
+        aipath.canMove = false;
+    }
+
     public void deathState() {
         desSetter.target = null;
         aipath.canMove = false;
+        knockback = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        player_scr.xp += 10;
+        dead = true;
         Debug.Log("Im Dead, lol");
+        state = "cutsceneState";
         // Destroy(gameObject);
     }
 
@@ -116,6 +129,9 @@ public class brawler : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col) {
         Vector3 info = new Vector3(trans.position.x, trans.position.y, damage);
         col.gameObject.transform.gameObject.SendMessage("punch", info);
+        if (knockback && (col.gameObject.name != "brawler enemy" && col.gameObject.name != "bullet")) {
+            knockback = false;
+        }
     }
 
     public void takeDamage(float damage) {

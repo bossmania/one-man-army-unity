@@ -133,42 +133,49 @@ public class level_generator : MonoBehaviour
                 }
             }
 
+            for (int i=0; i<GRID_SIZE; i++) {
+                for (int j=0; j<GRID_SIZE; j++) {
+                    if (grid[i, j] == START) {
+                        Vector3 pos = floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)) + new Vector3(1.5f, 1.5f, 0);
+                        Quaternion dire = Quaternion.identity;
+                        if (grid[i+1, j] == FLOOR) dire = Quaternion.Euler(0, 0, 0);
+                        if (grid[i-1, j] == FLOOR) dire = Quaternion.Euler(0, 0, 180);
+                        if (grid[i, j+1] == FLOOR) dire = Quaternion.Euler(0, 0, 90);
+                        if (grid[i, j-1] == FLOOR) dire = Quaternion.Euler(0, 0, 270);
+                        GameObject elevator_obj = Instantiate(elevator_prefab, pos, dire);
+                        elevator elevator_scr = elevator_obj.GetComponent<elevator>();
+                        elevator_scr.type = "start";
+                        player_trans.position = pos;
+                        camera_trans.position = new Vector3(pos.x, pos.y, camera_trans.position.z);
+                    }
+                    if (grid[i, j] == END) {
+                        Vector3 pos = floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)) + new Vector3(1.5f, 1.5f, 0);
+                        Quaternion dire = Quaternion.identity;
+                        if (grid[i+1, j] == FLOOR) dire = Quaternion.Euler(0, 0, 0);
+                        if (grid[i-1, j] == FLOOR) dire = Quaternion.Euler(0, 0, 180);
+                        if (grid[i, j+1] == FLOOR) dire = Quaternion.Euler(0, 0, 90);
+                        if (grid[i, j-1] == FLOOR) dire = Quaternion.Euler(0, 0, 270);
+                        GameObject elevator_obj2 = Instantiate(elevator_prefab, pos, dire);
+                        elevator elevator_scr = elevator_obj2.GetComponent<elevator>();
+                        elevator_scr.type = "exit";
+                    }
+                }
+            }
+
         for (int i=0; i<GRID_SIZE; i++) {
             for (int j=0; j<GRID_SIZE; j++) {
                 if (grid[i, j] == FLOOR) {
                     floor_tilemap.SetTile(new Vector3Int(i, j, 0), floor_tile);
-                    if (Random.Range(1, 50) == 1) {
-                        int type = Random.Range(0, enemies.Length-1);
-                        Instantiate(enemies[type], floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)), new Quaternion(0, 0, 0, 0));
-                    }
+                    float dis = Vector3.Distance(floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)), player_trans.position);
+                    // if (Random.Range(1, 50) == 1 && dis >= 20) {
+                    //     int type = Random.Range(0, enemies.Length-1);
+                    //     Instantiate(enemies[type], floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)), new Quaternion(0, 0, 0, 0));
+                    // }
                 }
                 if (grid[i, j] == WALL) {
                     wall_tilemap.SetTile(new Vector3Int(i, j, 0), wall_tile);
                 }
-                if (grid[i, j] == START) {
-                    Vector3 pos = floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)) + new Vector3(1.5f, 1.5f, 0);
-                    Quaternion dire = Quaternion.identity;
-                    if (grid[i+1, j] == FLOOR) dire = Quaternion.Euler(0, 0, 0);
-                    if (grid[i-1, j] == FLOOR) dire = Quaternion.Euler(0, 0, 180);
-                    if (grid[i, j+1] == FLOOR) dire = Quaternion.Euler(0, 0, 90);
-                    if (grid[i, j-1] == FLOOR) dire = Quaternion.Euler(0, 0, 270);
-                    GameObject elevator_obj = Instantiate(elevator_prefab, pos, dire);
-                    elevator elevator_scr = elevator_obj.GetComponent<elevator>();
-                    elevator_scr.type = "start";
-                    player_trans.position = pos;
-                    camera_trans.position = new Vector3(pos.x, pos.y, camera_trans.position.z);
-                }
-                if (grid[i, j] == END) {
-                    Vector3 pos = floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)) + new Vector3(1.5f, 1.5f, 0);
-                    Quaternion dire = Quaternion.identity;
-                    if (grid[i+1, j] == FLOOR) dire = Quaternion.Euler(0, 0, 0);
-                    if (grid[i-1, j] == FLOOR) dire = Quaternion.Euler(0, 0, 180);
-                    if (grid[i, j+1] == FLOOR) dire = Quaternion.Euler(0, 0, 90);
-                    if (grid[i, j-1] == FLOOR) dire = Quaternion.Euler(0, 0, 270);
-                    GameObject elevator_obj2 = Instantiate(elevator_prefab, pos, dire);
-                    elevator elevator_scr = elevator_obj2.GetComponent<elevator>();
-                    elevator_scr.type = "exit";
-                }
+
             }
         }
     }

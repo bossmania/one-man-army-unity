@@ -720,7 +720,7 @@ MonoBehaviour:
   max_hp: 100
   hp: 0
   hp_bar: {fileID: 5000455517167761543}
-  state: chaseState
+  state: cutsceneState
   rb: {fileID: 3213725904747132187}
   gun: {fileID: 718316268084017175}
   gun_scr: {fileID: 6394885897283553857}
@@ -736,6 +736,10 @@ MonoBehaviour:
   stagger_cooldown: 0
   stagger_flash_timer: 0.25
   stagger_flash_cooldown: 0
+  knockback_timer: 0
+  knockback_cooldown: 0
+  knockback: 0
+  knockback_dir: {x: 0, y: 0, z: 0}
 --- !u!114 &4704619770559918152
 MonoBehaviour:
   m_ObjectHideFlags: 0

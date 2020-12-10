@@ -30,14 +30,14 @@ public class elevator : MonoBehaviour
                         dead++;
                     }
                 } else {
-                    if (enemy_scr.state == "deathState") {
+                    if (enemy_scr.dead) {
                         dead++;
                     }
                 }
             }
             if (dead == GameObject.FindGameObjectsWithTag("enemy").Length) {
                 collideBox.enabled = false;
-                Debug.Log("you can leave");
+                // Debug.Log("you can leave");
             }
         }
     }
@@ -46,6 +46,7 @@ public class elevator : MonoBehaviour
         if (type == "exit") {
             player player_scr = col.GetComponent<player>();
             player_scr.state = "cutsceneState";
+            player_scr.xp += 30;
             Debug.Log("trigger the loading screen");
             GameObject loadingScreenObj = Instantiate(loadingScreen, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
             loading loadingScreen_scr = loadingScreenObj.GetComponent<loading>();
@@ -55,6 +56,15 @@ public class elevator : MonoBehaviour
     void OnTriggerExit2D(Collider2D col) {
         if (type == "start") {
             collideBox.enabled = true;
+            foreach (GameObject enemy_obj in GameObject.FindGameObjectsWithTag("enemy")) {
+                enemy enemy_scr = enemy_obj.GetComponent<enemy>();
+                if (enemy_scr == null) {
+                    brawler brawler_scr = enemy_obj.GetComponent<brawler>();
+                    brawler_scr.state = "chaseState";
+                } else {
+                    enemy_scr.state = "chaseState";
+                }
+            }
         }
     }
 }

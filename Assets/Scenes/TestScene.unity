@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 420893551}
   - component: {fileID: 420893550}
   - component: {fileID: 420893552}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ Transform:
   - {fileID: 1490176318}
   - {fileID: 834455787}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577392711
 GameObject:
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 577392712}
   - component: {fileID: 577392714}
   - component: {fileID: 577392713}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 589875714}
   - component: {fileID: 589875713}
   - component: {fileID: 589875712}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: freeze canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,7 +692,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &657519625
 GameObject:
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 657519626}
   - component: {fileID: 657519628}
   - component: {fileID: 657519627}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -886,28 +886,29 @@ Tilemap:
     m_Data:
       e00: NaN
       e01: 0
-      e02: -8.793608e-31
+      e02: -0.000000016959248
       e03: NaN
       e10: NaN
       e11: 0
-      e12: 8.8e-44
+      e12: 8.1e-44
       e13: NaN
-      e20: 3784.8594
-      e21: -8.793593e-31
+      e20: 1.9201691e+13
+      e21: -0.00000001695922
       e22: 0
       e23: 0
-      e30: 6.21e-43
-      e31: 8.8e-44
+      e30: 6.1e-43
+      e31: 8.1e-44
       e32: 0
       e33: 0
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: -3.2241811e+10, g: -3.2241811e+10, b: -3.2241811e+10, a: -3.2241811e+10}
+    m_Data: {r: 0.0000000013376429, g: 0.0000000013376429, b: 0.0000000013376429,
+      a: 0.0000000013376429}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -13, y: -2, z: 0}
-  m_Size: {x: 13, y: 5, z: 1}
+  m_Size: {x: 17, y: 13, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -954,7 +955,7 @@ GameObject:
   - component: {fileID: 939622073}
   - component: {fileID: 939622078}
   - component: {fileID: 939622079}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1007,6 +1008,10 @@ MonoBehaviour:
   knockback_cooldown: 0
   knockback: 0
   knockback_dir: {x: 0, y: 0, z: 0}
+  xp: 0
+  max_xp: 10
+  upgradePoints: 0
+  saveSystemScript: {fileID: 0}
 --- !u!50 &939622074
 Rigidbody2D:
   serializedVersion: 4
@@ -1102,7 +1107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939622072}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15, y: 0.5, z: 0}
+  m_LocalPosition: {x: 17.30215, y: 17.855124, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 445657002}
@@ -1294,7 +1299,7 @@ GameObject:
   - component: {fileID: 1135020537}
   - component: {fileID: 1135020536}
   - component: {fileID: 1135020535}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: gernade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1451,7 +1456,7 @@ GameObject:
   - component: {fileID: 1385775800}
   - component: {fileID: 1385775802}
   - component: {fileID: 1385775801}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1842,7 +1847,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554143901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.2327805, y: -1.173761, z: -33.2}
+  m_LocalPosition: {x: 28.06937, y: 16.181362, z: -33.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1904,7 +1909,7 @@ GameObject:
   - component: {fileID: 1607461316}
   - component: {fileID: 1607461318}
   - component: {fileID: 1607461317}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: filter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1978,7 +1983,7 @@ GameObject:
   - component: {fileID: 1638241932}
   - component: {fileID: 1638241934}
   - component: {fileID: 1638241933}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2181,7 +2186,7 @@ GameObject:
   - component: {fileID: 1796211670}
   - component: {fileID: 1796211672}
   - component: {fileID: 1796211671}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Freeze Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2313,7 +2318,7 @@ GameObject:
   - component: {fileID: 1834475144}
   - component: {fileID: 1834475146}
   - component: {fileID: 1834475145}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2825,7 +2830,7 @@ GameObject:
   - component: {fileID: 2140773847}
   - component: {fileID: 2140773851}
   - component: {fileID: 2140773852}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: gui
   m_TagString: Untagged
   m_Icon: {fileID: 0}

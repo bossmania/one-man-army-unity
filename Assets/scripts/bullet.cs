@@ -29,10 +29,10 @@ public class bullet : MonoBehaviour
 
     void moveState() {
         if (applyForce == false) {
-            rb.AddForce(trans.up*1, ForceMode2D.Force);
+            rb.AddForce(trans.up*0.3f, ForceMode2D.Force);
             applyForce = true;
         }
-        RaycastHit2D hit = Physics2D.Raycast(trans.position, trans.TransformDirection(Vector2.up), 4f);
+        RaycastHit2D hit = Physics2D.Raycast(trans.position, trans.TransformDirection(Vector2.up), 8f);
         if (hit.collider != null) {
             hit.transform.gameObject.SendMessage("takeDamage", damage);
             Destroy(gameObject);

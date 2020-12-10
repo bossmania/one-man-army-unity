@@ -686,7 +686,7 @@ MonoBehaviour:
   max_hp: 50
   hp: 0
   hp_bar: {fileID: 5938568151117699374}
-  state: chaseState
+  state: cutsceneState
   rb: {fileID: 2626165403794443032}
   gun: {fileID: 1607738722255766576}
   gun_scr: {fileID: 5947290080670212902}
