@@ -13,6 +13,10 @@ public class playerData
     public int max_xp;
     public int upgradePoints;
     public int level;
+    public float hp_bonus;
+    public float freeze_bonus;
+    public float damage_bonus;
+    public bool dual_wield;
 
     public int pistol_ammo;
     public int ak_ammo;
@@ -29,6 +33,10 @@ public class playerData
         max_xp = player_scr.max_xp;
         upgradePoints = player_scr.upgradePoints;
         level = player_scr.level;
+        hp_bonus = player_scr.hp_bonus;
+        freeze_bonus = player_scr.freeze_bonus;
+        damage_bonus = player_scr.damage_bonus;
+        dual_wield = player_scr.dual_wield;
 
         foreach (Transform child in player_scr.guns)  {
             if (child.name == "pistol") {

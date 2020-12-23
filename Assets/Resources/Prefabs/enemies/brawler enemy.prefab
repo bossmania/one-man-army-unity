@@ -540,6 +540,7 @@ MonoBehaviour:
   knockback_cooldown: 0
   knockback: 0
   knockback_dir: {x: 0, y: 0, z: 0}
+  dead: 1
 --- !u!114 &8683647598290379070
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -146,6 +146,7 @@ MonoBehaviour:
   rb: {fileID: 8537801355046719542}
   gun: {fileID: 5986083666408561978}
   gun_scr: {fileID: 169480240596856684}
+  barrel: {fileID: 2770630761644921443}
   target: {fileID: 0}
   desSetter: {fileID: 8668639826452047582}
   aipath: {fileID: 1743520039596241489}
@@ -162,6 +163,7 @@ MonoBehaviour:
   knockback_cooldown: 0
   knockback: 0
   knockback_dir: {x: 0, y: 0, z: 0}
+  dead: 0
 --- !u!114 &1994819170151437669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,13 +545,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8422770682673386009}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 0.98000014, y: -0.05999983, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -2.15, y: -0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5986083666408561978}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &8579890151079253884
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,14 +810,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9066556004812154118}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.49, y: -0.26, z: 0.96}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: -0.27, y: -0.26, z: 0.96}
   m_LocalScale: {x: 0.66687196, y: 0.4016848, z: 1}
   m_Children:
   - {fileID: 2770630761644921443}
   m_Father: {fileID: 1827736957279367863}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &9219820568502917673
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -878,7 +880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f816e9875f4340d429c7a8ce27bcc115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrel: {fileID: 2770630761644921443}
   bullet_prefab: {fileID: 1407856483140768472, guid: 1664500f9ffe95d40b9a32ce7429d15b,
     type: 3}
   clip: 6
@@ -886,6 +887,7 @@ MonoBehaviour:
   max_clip: 0
   weapon: pistol
   damage: 5
+  og_damage: 0
   shoot_timer: 1
   shoot_cooldown: 0
   ammo_text: {fileID: 0}

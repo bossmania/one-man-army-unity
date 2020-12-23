@@ -35,7 +35,6 @@ public class camera : MonoBehaviour
             Vector3 dir = new Vector3(Input.GetAxis("right x"), Input.GetAxis("right y"), 0f)*5f;
             dir.x = Mathf.Clamp(dir.x, -mouseRadius, mouseRadius);
             dir.y = Mathf.Clamp(dir.y, -mouseRadius, mouseRadius);
-            Debug.Log(dir);
             Vector3 pos = player.position + dir;
             trans.position = new Vector3(pos.x, pos.y, trans.position.z);
         }

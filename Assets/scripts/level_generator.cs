@@ -13,6 +13,7 @@ public class level_generator : MonoBehaviour
     public Tilemap wall_tilemap;
     public Tile wall_tile;
     public GameObject elevator_prefab;
+    public GameObject darkness;
     public Transform player_trans;
     public Transform camera_trans;
     float wait = 2f;
@@ -175,7 +176,9 @@ public class level_generator : MonoBehaviour
                 if (grid[i, j] == WALL) {
                     wall_tilemap.SetTile(new Vector3Int(i, j, 0), wall_tile);
                 }
-
+                if (Random.Range(1, 10) == 1) {
+                    Instantiate(darkness, camera_trans.position, camera_trans.rotation);
+                }
             }
         }
     }

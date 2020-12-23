@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class pause : MonoBehaviour
 {
     List<GameObject> objs = new List<GameObject>();
-    // public EventSystem system;
     public GameObject[] options = new GameObject[5];
     public GameObject[] bg = new GameObject[5];
     int selected = 0;

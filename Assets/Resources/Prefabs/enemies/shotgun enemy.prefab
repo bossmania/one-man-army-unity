@@ -146,6 +146,7 @@ MonoBehaviour:
   rb: {fileID: 8661452203015575702}
   gun: {fileID: 6727571465356498330}
   gun_scr: {fileID: 870857851165550540}
+  barrel: {fileID: 2899390189563648707}
   target: {fileID: 0}
   desSetter: {fileID: 8503574575954947710}
   aipath: {fileID: 1620679892637367025}
@@ -162,6 +163,7 @@ MonoBehaviour:
   knockback_cooldown: 0
   knockback: 0
   knockback_dir: {x: 0, y: 0, z: 0}
+  dead: 0
 --- !u!114 &1576524357317434821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +548,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8330838378483248550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.49, y: -0.2111, z: 1.8012435}
+  m_LocalPosition: {x: 1.2, y: -0.2111, z: 1.8012435}
   m_LocalScale: {x: 0.66687196, y: 0.65931344, z: 1}
   m_Children:
   - {fileID: 2899390189563648707}
@@ -615,7 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f816e9875f4340d429c7a8ce27bcc115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrel: {fileID: 2899390189563648707}
   bullet_prefab: {fileID: 1407856483140768472, guid: 1664500f9ffe95d40b9a32ce7429d15b,
     type: 3}
   clip: 2
@@ -623,6 +624,7 @@ MonoBehaviour:
   max_clip: 0
   weapon: shotgun
   damage: 12
+  og_damage: 0
   shoot_timer: 1.2
   shoot_cooldown: 0
   ammo_text: {fileID: 0}
@@ -888,7 +890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8839515712281008825}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 0.98000014, y: -0.05999983, z: 0}
+  m_LocalPosition: {x: 0.5, y: -0.05999983, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6727571465356498330}

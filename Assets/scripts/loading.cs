@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class loading : MonoBehaviour
 {
     public int dest;
-    // public player player_scr;
+    public player player_scr;
     void Start()
     {
         player player_scr = GameObject.FindWithTag("Player").GetComponent<player>();

@@ -99,14 +99,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2825954960377085995}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4528, y: -0.26, z: 1.8012435}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: -0.088, y: -0.26, z: 1.8012435}
   m_LocalScale: {x: 0.6259719, y: 0.4016848, z: 1}
   m_Children:
   - {fileID: 8977484169170483022}
   m_Father: {fileID: 4879723460864612250}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &2672409480069660420
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f816e9875f4340d429c7a8ce27bcc115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrel: {fileID: 8977484169170483022}
   bullet_prefab: {fileID: 1407856483140768472, guid: 1664500f9ffe95d40b9a32ce7429d15b,
     type: 3}
   clip: 30
@@ -177,6 +176,7 @@ MonoBehaviour:
   max_clip: 0
   weapon: Assault Rifle
   damage: 8
+  og_damage: 0
   shoot_timer: 0.4
   shoot_cooldown: 0
   ammo_text: {fileID: 0}
@@ -439,13 +439,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3316512969681450804}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 0.98000014, y: -0.05999983, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -1.98, y: -0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 718316268084017175}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &4986502819145352422
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,6 +724,7 @@ MonoBehaviour:
   rb: {fileID: 3213725904747132187}
   gun: {fileID: 718316268084017175}
   gun_scr: {fileID: 6394885897283553857}
+  barrel: {fileID: 8977484169170483022}
   target: {fileID: 0}
   desSetter: {fileID: 2497279289758483443}
   aipath: {fileID: 4816342013331658620}
@@ -740,6 +741,7 @@ MonoBehaviour:
   knockback_cooldown: 0
   knockback: 0
   knockback_dir: {x: 0, y: 0, z: 0}
+  dead: 0
 --- !u!114 &4704619770559918152
 MonoBehaviour:
   m_ObjectHideFlags: 0

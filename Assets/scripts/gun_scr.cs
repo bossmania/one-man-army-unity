@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class gun_scr : MonoBehaviour
 {
-    public Transform barrel;
     public GameObject bullet_prefab;
     public int clip;
     public int ammo;
     public int max_clip;
     public string weapon;
     public float damage;
+    public float og_damage;
     public float shoot_timer;
     public float shoot_cooldown;
     public ammo_text ammo_text;
@@ -21,6 +21,7 @@ public class gun_scr : MonoBehaviour
     void Start()
     {
         max_clip = clip;
+        og_damage = damage;
         shoot_cooldown = shoot_timer;
         reload_cooldown = reload_timer;
     }
@@ -44,12 +45,12 @@ public class gun_scr : MonoBehaviour
             }
         }
 
-        // if (ammo_text != null) {
-        //     ammo_text.set_ammo(clip, ammo, weapon);
-        // }
+        if (ammo_text != null) {
+            ammo_text.set_ammo(clip, ammo, weapon);
+        }
     }
 
-    public void shoot() {
+    public void shoot(Transform barrel, bool dual) {
         if (shoot_cooldown <= 0) {
             if (clip != 0) {
                 if (weapon == "shotgun") {
@@ -69,10 +70,13 @@ public class gun_scr : MonoBehaviour
                 GameObject bullet_obj = Instantiate(bullet_prefab, barrel.position, barrel.rotation);
                 bullet bullet_scr = bullet_obj.GetComponent<bullet>();
                 bullet_scr.damage = damage;
-                shoot_cooldown = shoot_timer;
-                clip -= 1;
-                if (ammo_text != null) {
-                    ammo_text.set_ammo(clip, ammo, weapon);
+
+                if (dual) {
+                    shoot_cooldown = shoot_timer;
+                    clip -= 1;
+                    if (ammo_text != null) {
+                        ammo_text.set_ammo(clip, ammo, weapon);
+                    }
                 }
             }
         }

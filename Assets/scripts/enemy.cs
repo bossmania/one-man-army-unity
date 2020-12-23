@@ -14,6 +14,7 @@ public class enemy : MonoBehaviour
     public Rigidbody2D rb;
     public Transform gun;
     public gun_scr gun_scr;
+    public Transform barrel;
     public Transform target;
     public AIDestinationSetter desSetter;
     public AIPath aipath;
@@ -89,7 +90,6 @@ public class enemy : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        // Debug.Log(col.gameObject.name);
         if (knockback && (col.gameObject.name != "brawler enemy" && col.gameObject.name != "bullet")) {
             knockback = false;
         }
@@ -106,7 +106,7 @@ public class enemy : MonoBehaviour
         if (lr != null) {
             lr.enabled = true;
             List<Vector3> pos = new List<Vector3>();
-            pos.Add(gun_scr.barrel.position);
+            pos.Add(barrel.position);
             pos.Add(player.position);
             lr.startColor = Color.red;
             lr.endColor = Color.red;
@@ -116,7 +116,7 @@ public class enemy : MonoBehaviour
             lr.useWorldSpace = true;
         }
 
-        gun_scr.shoot();
+        gun_scr.shoot(barrel, true);
     }
 
     public void freezeState() {

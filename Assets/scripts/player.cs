@@ -12,8 +12,10 @@ public class player : MonoBehaviour
     public Camera cam;
     public LineRenderer lr;
     public float max_hp = 100f;
+    public float og_hp;
     public float hp;
     public float max_freeze = 100f;
+    public float og_freeze;
     public float freeze;
     public bool is_freeze = false;
     public float freeze_remove;
@@ -23,6 +25,7 @@ public class player : MonoBehaviour
     public health_bar hp_bar;
     public ammo_text ammo_text;
     public Transform barrel;
+    public Transform dual_barrel;
     public Transform gun;
     public bool can_shoot = true;
     public bool can_knife = true;
@@ -42,9 +45,13 @@ public class player : MonoBehaviour
     public bool knockback = false;
     public Vector3 knockback_dir;
     public int xp = 0;
-    public int max_xp = 10;
+    public int max_xp = 30;
     public int upgradePoints = 0;
     public int level = 1;
+    public float hp_bonus = 1;
+    public float freeze_bonus = 1;
+    public float damage_bonus = 1;
+    public bool dual_wield = false;
     public saveSystem saveSystemController = new saveSystem();
 
     Vector2 move;
@@ -53,9 +60,20 @@ public class player : MonoBehaviour
     void changeWeapon() {
         foreach (Transform child in guns) {
             if (weapons[(int)weapon] == child.name) {
+                child.gameObject.SetActive(true);
                 gun = child.GetComponent<Transform>();
                 gun_scr = child.GetComponent<gun_scr>();
                 barrel = gun.GetChild(0).GetComponent<Transform>();
+                if (dual_wield) {
+                    if (gun.GetChild(1).gameObject.activeSelf == false) {
+                        gun.GetChild(1).gameObject.SetActive(true);
+                        dual_barrel = gun.GetChild(1).GetComponent<Transform>();
+                    }
+                    dual_barrel = gun.GetChild(1).GetComponent<Transform>();
+                }
+                gun_scr.damage = gun_scr.og_damage*damage_bonus;
+            } else {
+                child.gameObject.SetActive(false);
             }
         }
         cam.orthographicSize = 8.83f;
@@ -66,7 +84,9 @@ public class player : MonoBehaviour
     void Start()
     {
         hp = max_hp;
+        og_hp = max_hp;
         freeze = max_freeze;
+        og_freeze = max_freeze;
         knockback_cooldown = knockback_timer;
 
         foreach (Transform child in guns) {
@@ -99,8 +119,6 @@ public class player : MonoBehaviour
                     child.GetComponent<gun_scr>().ammo = data.sniper_ammo;
                 }
             }
-        } else {
-            saveSystemController.savePlayer(this);
         }
 
         freeze_bar.set_max_freeze(max_freeze);
@@ -233,7 +251,12 @@ public class player : MonoBehaviour
 
         if (Input.GetButton("shoot") || Input.GetAxisRaw("shoot") > 0) {
             if (can_shoot) {
-                gun_scr.shoot();
+                if (dual_wield) {
+                    gun_scr.shoot(barrel, false);
+                    gun_scr.shoot(dual_barrel, true);
+                } else {
+                    gun_scr.shoot(barrel, true);
+                }
             }
         }
 
@@ -326,16 +349,13 @@ public class player : MonoBehaviour
 
         if (xp >= max_xp) {
             upgradePoints++;
-            max_xp = xp+10;
+            max_xp = xp+20;
             xp = xp - max_xp;
             if (xp < 0) {
                 xp = 0;
             }
         }
-        Debug.Log(xp);
-        Debug.Log(max_xp);
-        Debug.Log(upgradePoints);
-        Debug.Log("-------------------------------------------------------------");
+
     }
 
     void deathState() {
