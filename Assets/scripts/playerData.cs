@@ -13,6 +13,7 @@ public class playerData
     public int max_xp;
     public int upgradePoints;
     public int level;
+    public int gameLevel;
     public float hp_bonus;
     public float freeze_bonus;
     public float damage_bonus;
@@ -33,6 +34,7 @@ public class playerData
         max_xp = player_scr.max_xp;
         upgradePoints = player_scr.upgradePoints;
         level = player_scr.level;
+        gameLevel = player_scr.gameLevel;
         hp_bonus = player_scr.hp_bonus;
         freeze_bonus = player_scr.freeze_bonus;
         damage_bonus = player_scr.damage_bonus;

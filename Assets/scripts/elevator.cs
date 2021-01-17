@@ -38,10 +38,11 @@ public class elevator : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        if (type == "exit") {
+        if (type == "exit" && col.gameObject.tag == "Player" ) {
             player player_scr = col.GetComponent<player>();
             player_scr.state = "cutsceneState";
             player_scr.xp += 30;
+            player_scr.gameLevel++;
             foreach (GameObject enemy_obj in GameObject.FindGameObjectsWithTag("enemy")) {
                 enemy enemy_scr = enemy_obj.GetComponent<enemy>();
                 if (enemy_scr == null) {
@@ -55,7 +56,7 @@ public class elevator : MonoBehaviour
         }
     }
     void OnTriggerExit2D(Collider2D col) {
-        if (type == "start") {
+        if (type == "start" && col.gameObject.tag == "Player") {
             collideBox.enabled = true;
             foreach (GameObject enemy_obj in GameObject.FindGameObjectsWithTag("enemy")) {
                 enemy enemy_scr = enemy_obj.GetComponent<enemy>();

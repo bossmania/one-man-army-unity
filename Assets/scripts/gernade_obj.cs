@@ -10,6 +10,7 @@ public class gernade_obj : MonoBehaviour
     public float death_countdown;
     public string state;
     public Vector2 velocity;
+    public GameObject owner;
     void Awake()
     {
         death_countdown = death_timer;
@@ -29,15 +30,23 @@ public class gernade_obj : MonoBehaviour
         velocity = rb.velocity;
         if (death_countdown < 0) {
             foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
-                Transform enemy_trans = enemy.GetComponent<Transform>();
-                if ((trans.position - enemy_trans.position).magnitude < 3) {
-                    enemy.SendMessage("takeDamage", 120);
+                if (enemy != owner) {
+                    Transform enemy_trans = enemy.GetComponent<Transform>();
+                    Vector3 dis = (trans.position - enemy_trans.position);
+                    dis.z = 0;
+                    if (dis.magnitude < 3) {
+                        enemy.SendMessage("takeDamage", 70);
+                    }
                 }
             }
             foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
-                Transform player_trans = player.GetComponent<Transform>();
-                if ((trans.position - player_trans.position).magnitude < 3) {
-                    player.SendMessage("takeDamage", 50);
+                if (player != owner) {
+                    Transform player_trans = player.GetComponent<Transform>();
+                    Vector3 dis = (trans.position - player_trans.position);
+                    dis.z = 0;
+                    if (dis.magnitude < 3) {
+                        player.SendMessage("takeDamage", 70);
+                    }
                 }
             }
             Destroy(gameObject);

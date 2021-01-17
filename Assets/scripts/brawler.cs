@@ -28,11 +28,21 @@ public class brawler : MonoBehaviour
     public float knockback_cooldown;
     public bool knockback = false;
     public Vector3 knockback_dir;
+    public float shock_timer;
+    public float shock_cooldown;
+    public bool shock = false;
     public bool dead = true;
-
+    public bool is_slow;
+    public float slow;
+    public float slow_timer;
+    public float slow_cooldown;
+    public float spd;
+    public float og_spd;
 
     // Start is called before the first frame update
     void Start() {
+        og_spd = spd;
+        slow_cooldown = slow_timer;
         hp = max_hp;
         hp_bar.set_max_hp(max_hp);
         knockback_cooldown = knockback_timer;
@@ -49,6 +59,21 @@ public class brawler : MonoBehaviour
         if (state != "null") {
             Invoke(state, 0f);
         }
+
+        if (is_slow) {
+            spd = og_spd * slow;
+            aipath.maxSpeed = spd;
+            if (slow_timer <= 0) {
+                is_slow = false;
+                slow_timer = slow_cooldown;
+            } else {
+                slow_timer -= Time.deltaTime;
+            }
+        } else {
+            spd = og_spd;
+            aipath.maxSpeed = spd;
+        }
+
         if (knockback) {
             if (knockback_timer >= 0) {
                 trans.position += (knockback_dir*10) * Time.deltaTime;
@@ -56,6 +81,15 @@ public class brawler : MonoBehaviour
             } else {
                 knockback_timer = knockback_cooldown;
                 knockback = false;
+            }
+        }
+
+        if (shock) {
+            if (shock_cooldown <= 0) {
+                hp -= 10;
+                shock_cooldown = shock_timer;
+            } else {
+                shock_cooldown -= Time.deltaTime;
             }
         }
 
@@ -78,6 +112,7 @@ public class brawler : MonoBehaviour
     public void chaseState() {
         target = player;
         aipath.canMove = true;
+        aipath.maxSpeed = spd;
         desSetter.target = target;
         Vector2 dir = target.position - trans.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -99,6 +134,7 @@ public class brawler : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         player_scr.xp += 10;
         dead = true;
+        rb.velocity = new Vector2(0, 0);
         Debug.Log("Im Dead, lol");
         state = "cutsceneState";
         // Destroy(gameObject);
@@ -184,5 +220,13 @@ public class brawler : MonoBehaviour
             }
             state = "deathState";
         }
+    }
+
+    public void shockStart() {
+        shock = true;
+    }
+
+    public void shockEnd() {
+        shock = false;
     }
 }

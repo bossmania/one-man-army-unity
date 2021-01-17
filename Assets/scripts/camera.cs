@@ -12,11 +12,17 @@ public class camera : MonoBehaviour
 
     void Start() {
         trans.position = new Vector3(player.position.x, player.position.y, trans.position.z);
+        if (player == null) {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null) {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
         if ((Input.GetAxis("mouse x") != 0 || Input.GetAxis("mouse y") != 0)) {
             mouse = true;
         }

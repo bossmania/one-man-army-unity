@@ -27,12 +27,12 @@ public class xp_bar : MonoBehaviour
 
         xp_text.text = "XP: " + player_scr.xp.ToString() + "/" + player_scr.max_xp.ToString();
         level_text.text = "Level " + player_scr.level.ToString();
-        upgradePoints_text.text = "Spendable Upgrades: " + player_scr.upgradePoints.ToString();
+        upgradePoints_text.text = "Spendable Upgrades Points: " + player_scr.upgradePoints.ToString();
         hp_bonus_text.text = "x" + player_scr.hp_bonus.ToString();
         freeze_bonus_text.text = "x" + player_scr.freeze_bonus.ToString();
         damage_bonus_text.text = "x" + player_scr.damage_bonus.ToString();
         if (player_scr.dual_wield == false) {
-            dual_wield_text.text = "Upgrade Cost: 3";
+            dual_wield_text.text = "Upgrade Cost: 5";
         } else {
             dual_wield_text.text = "Purchased";
         }

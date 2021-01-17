@@ -31,11 +31,23 @@ public class enemy : MonoBehaviour
     public float knockback_cooldown;
     public bool knockback = false;
     public Vector3 knockback_dir;
+    public float shock_timer;
+    public float shock_cooldown;
+    public bool shock = false;
     public bool dead = false;
+    public bool is_slow;
+    public float slow;
+    public float slow_timer;
+    public float slow_cooldown;
+    public float spd;
+    public float og_spd;
 
+    GameObject traps;
 
     // Start is called before the first frame update
     void Start() {
+        og_spd = spd;
+        slow_cooldown = slow_timer;
         hp = max_hp;
         hp_bar.set_max_hp(max_hp);
         knockback_cooldown = knockback_timer;
@@ -53,6 +65,11 @@ public class enemy : MonoBehaviour
         }
 
         weapon.text = gun_scr.weapon;
+
+        if (gameObject.name == "minigun boss") {
+            traps = GameObject.FindGameObjectWithTag("traps");
+            traps.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -62,6 +79,20 @@ public class enemy : MonoBehaviour
             Invoke(state, 0f);
         }
 
+        if (is_slow) {
+            spd = og_spd * slow;
+            aipath.maxSpeed = spd;
+            if (slow_timer <= 0) {
+                is_slow = false;
+                slow_timer = slow_cooldown;
+            } else {
+                slow_timer -= Time.deltaTime;
+            }
+        } else {
+            spd = og_spd;
+            aipath.maxSpeed = spd;
+        }
+
         if (knockback) {
             if (knockback_timer >= 0) {
                 trans.position += (knockback_dir*10) * Time.deltaTime;
@@ -69,6 +100,15 @@ public class enemy : MonoBehaviour
             } else {
                 knockback_timer = knockback_cooldown;
                 knockback = false;
+            }
+        }
+
+        if (shock) {
+            if (shock_cooldown <= 0) {
+                hp -= 10;
+                shock_cooldown = shock_timer;
+            } else {
+                shock_cooldown -= Time.deltaTime;
             }
         }
 
@@ -87,6 +127,7 @@ public class enemy : MonoBehaviour
         }
 
         hp_bar.set_hp(hp);
+
     }
 
     void OnCollisionEnter2D(Collision2D col) {
@@ -98,6 +139,7 @@ public class enemy : MonoBehaviour
     public void chaseState() {
         target = player;
         aipath.canMove = true;
+        aipath.maxSpeed = spd;
         desSetter.target = target;
         Vector2 dir = target.position - trans.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -116,11 +158,34 @@ public class enemy : MonoBehaviour
             lr.useWorldSpace = true;
         }
 
-        gun_scr.shoot(barrel, true);
+        if (gameObject.name != "gernade launcher guy") {
+            gun_scr.shoot(barrel, true);
+        } else {
+            if (gun_scr.shoot_cooldown <= 0) {
+                gun_scr.shoot_cooldown = gun_scr.shoot_timer;
+                gun.GetComponent<gernade_scr>().throw_gernade(gameObject);
+            }
+        }
+
+
+        if (gameObject.name == "camo boss") {
+            GetComponent<SpriteRenderer>().enabled = false;
+            gun.GetComponent<SpriteRenderer>().enabled = false;
+            trans.GetChild(1).GetComponent<Canvas>().enabled = false;
+        }
+
+        // if (gameObject.name == "minigun boss" && hp <= (int)(max_hp/2)) {
+        //     traps.SetActive(true);
+        // }
     }
 
     public void freezeState() {
         aipath.canMove = false;
+        if (gameObject.name == "camo boss") {
+            GetComponent<SpriteRenderer>().enabled = true;
+            gun.GetComponent<SpriteRenderer>().enabled = true;
+            trans.GetChild(1).GetComponent<Canvas>().enabled = true;
+        }
     }
 
     public void cutsceneState() {
@@ -138,6 +203,7 @@ public class enemy : MonoBehaviour
         player_scr.xp += 10;
         hp = 0;
         dead = true;
+        rb.velocity = new Vector2(0, 0);
         Debug.Log("Im Dead, lol");
         state = "cutsceneState";
         // Destroy(gameObject);
@@ -216,5 +282,13 @@ public class enemy : MonoBehaviour
         knockback_dir = (trans.position-new Vector3(info.x, info.y, 0f));
         knockback_dir.z = 0f;
         knockback = true;
+    }
+
+    public void shockStart() {
+        shock = true;
+    }
+
+    public void shockEnd() {
+        shock = false;
     }
 }

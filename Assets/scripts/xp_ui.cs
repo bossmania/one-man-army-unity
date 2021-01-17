@@ -100,7 +100,7 @@ public class xp_ui : MonoBehaviour
 
     public void dual_wield() {
         if (player_scr.upgradePoints > 2 & player_scr.dual_wield == false) {
-            player_scr.upgradePoints -= 3;
+            player_scr.upgradePoints -= 5;
             player_scr.dual_wield = true;
         }
     }

@@ -12,12 +12,20 @@ public class level_generator : MonoBehaviour
     public Tile floor_tile;
     public Tilemap wall_tilemap;
     public Tile wall_tile;
+    public Tilemap water_tilemap;
+    public Tile water_tile;
     public GameObject elevator_prefab;
     public GameObject darkness;
+    public GameObject trap;
     public Transform player_trans;
+    public player player_scr;
     public Transform camera_trans;
+
+    int enemy = 0;
+    int maxEnemies = 0;
     float wait = 2f;
     bool scanned = false;
+    string type = null;
     int FLOOR = 1;
     int WALL = 2;
     int START = 3;
@@ -26,6 +34,22 @@ public class level_generator : MonoBehaviour
     void Start()
     {
         Object[] enemies = Resources.LoadAll("Prefabs/enemies");
+        maxEnemies = player_scr.gameLevel + Random.Range(0, 3);
+
+        if (player_scr.gameLevel > 3) {
+            int num = Random.Range(0, 11);
+            if (num <= 6) {
+                type = null;
+            } else {
+                if (num == 7 ||  num == 8) {
+                    type = "dark";
+                } else if (num == 9 || num == 10) {
+                    type = "water";
+                }
+            }
+        }
+
+        Debug.Log(type);
 
         int[,] grid = new int[GRID_SIZE, GRID_SIZE];
         int x = GRID_SIZE/2;
@@ -166,20 +190,27 @@ public class level_generator : MonoBehaviour
         for (int i=0; i<GRID_SIZE; i++) {
             for (int j=0; j<GRID_SIZE; j++) {
                 if (grid[i, j] == FLOOR) {
-                    floor_tilemap.SetTile(new Vector3Int(i, j, 0), floor_tile);
+                    if (type == "water" && Random.Range(1, 25) == 1) {
+                        water_tilemap.SetTile(new Vector3Int(i, j, 0), water_tile);
+                    } else {
+                        floor_tilemap.SetTile(new Vector3Int(i, j, 0), floor_tile);
+                    }
+
                     float dis = Vector3.Distance(floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)), player_trans.position);
-                    // if (Random.Range(1, 50) == 1 && dis >= 20) {
-                    //     int type = Random.Range(0, enemies.Length-1);
-                    //     Instantiate(enemies[type], floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)), new Quaternion(0, 0, 0, 0));
-                    // }
+                    if (Random.Range(1, 20) == 1 && dis >= 20 && enemy < maxEnemies) {
+                        int type = Random.Range(0, enemies.Length-1);
+                        Instantiate(enemies[type], floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)), new Quaternion(0, 0, 0, 0));
+                        enemy++;
+                    }
                 }
                 if (grid[i, j] == WALL) {
                     wall_tilemap.SetTile(new Vector3Int(i, j, 0), wall_tile);
                 }
-                if (Random.Range(1, 10) == 1) {
-                    Instantiate(darkness, camera_trans.position, camera_trans.rotation);
-                }
             }
+        }
+
+        if (type == "dark") {
+            Instantiate(darkness, camera_trans.position, camera_trans.rotation);
         }
     }
 

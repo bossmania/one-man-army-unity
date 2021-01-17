@@ -15,12 +15,13 @@ public class gernade_scr : MonoBehaviour
     public void set_gernade() {
         Text_field.text =  "Grenade: "+ gernades.ToString();
         trans.position = new Vector3(player_obj.position.x, trans.position.y, trans.position.z);
-        set_gernade();
     }
 
-    public void throw_gernade() {
+    public void throw_gernade(GameObject owner) {
         if (gernades > 0) {
-            Instantiate(gernade_prefab, player_scr.barrel.position, player_obj.rotation);
+            GameObject gernade = Instantiate(gernade_prefab, owner.GetComponent<enemy>().barrel.position, owner.GetComponent<Transform>().rotation);
+            gernade_obj gernade_obj = gernade.GetComponent<gernade_obj>();
+            gernade_obj.owner = owner;
             gernades -= 1;
             set_gernade();
         }
@@ -30,5 +31,6 @@ public class gernade_scr : MonoBehaviour
         trans = GetComponent<Transform>();
         player_obj = trans.parent.parent;
         trans.position = new Vector3(player_obj.position.x, trans.position.y, trans.position.z);
+        set_gernade();
     }
 }

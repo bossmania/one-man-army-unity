@@ -707,7 +707,16 @@ MonoBehaviour:
   knockback_cooldown: 0
   knockback: 0
   knockback_dir: {x: 0, y: 0, z: 0}
+  shock_timer: 0.5
+  shock_cooldown: 0
+  shock: 0
   dead: 0
+  is_slow: 0
+  slow: 0.5
+  slow_timer: 5
+  slow_cooldown: 0
+  spd: 3
+  og_spd: 0
 --- !u!114 &8957538140155503026
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,8 +8,8 @@ public class player : MonoBehaviour
 {
 
     public float spd;
+    public float og_spd;
     public Rigidbody2D rb;
-    public Camera cam;
     public LineRenderer lr;
     public float max_hp = 100f;
     public float og_hp;
@@ -20,6 +20,9 @@ public class player : MonoBehaviour
     public bool is_freeze = false;
     public float freeze_remove;
     public float freeze_add;
+    public bool can_freeze = false;
+    public float can_freeze_timer;
+    public float can_freeze_cooldown;
     public freeze_bar freeze_bar;
     public Image filter;
     public health_bar hp_bar;
@@ -44,13 +47,21 @@ public class player : MonoBehaviour
     public float knockback_cooldown;
     public bool knockback = false;
     public Vector3 knockback_dir;
+    public float shock_timer;
+    public float shock_cooldown;
+    public bool shock = false;
     public int xp = 0;
     public int max_xp = 30;
     public int upgradePoints = 0;
     public int level = 1;
+    public int gameLevel = 1;
     public float hp_bonus = 1;
     public float freeze_bonus = 1;
     public float damage_bonus = 1;
+    public bool is_slow;
+    public float slow;
+    public float slow_timer;
+    public float slow_cooldown;
     public bool dual_wield = false;
     public saveSystem saveSystemController = new saveSystem();
 
@@ -64,6 +75,8 @@ public class player : MonoBehaviour
                 gun = child.GetComponent<Transform>();
                 gun_scr = child.GetComponent<gun_scr>();
                 barrel = gun.GetChild(0).GetComponent<Transform>();
+                knife_scr.gun_spr = child.GetComponent<SpriteRenderer>();
+                tase_scr.gun_spr = child.GetComponent<SpriteRenderer>();
                 if (dual_wield) {
                     if (gun.GetChild(1).gameObject.activeSelf == false) {
                         gun.GetChild(1).gameObject.SetActive(true);
@@ -76,18 +89,21 @@ public class player : MonoBehaviour
                 child.gameObject.SetActive(false);
             }
         }
-        cam.orthographicSize = 8.83f;
+        Camera.main.orthographicSize = 8.83f;
         ammo_text.set_ammo(gun_scr.clip, gun_scr.ammo, gun_scr.weapon);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        og_spd = spd;
         hp = max_hp;
         og_hp = max_hp;
         freeze = max_freeze;
         og_freeze = max_freeze;
         knockback_cooldown = knockback_timer;
+        can_freeze_timer = can_freeze_cooldown;
+        slow_cooldown = slow_timer;
 
         foreach (Transform child in guns) {
             weapons.Add(child.name);
@@ -95,31 +111,31 @@ public class player : MonoBehaviour
 
         changeWeapon();
 
-        saveSystemController.setPath(Path.Combine(Application.persistentDataPath, "player.data"));
+        saveSystemController.setPath(Path.Combine(Application.persistentDataPath, "nothing.nothing"));
 
-        if (saveSystemController.checkSaveFile()) {
-            playerData data = saveSystemController.loadPlayer();
-            max_hp = data.max_hp;
-            hp = data.hp;
-            max_freeze = data.max_freeze;
-            freeze = data.freeze;
-            xp = data.xp;
-            max_xp = data.max_xp;
-            upgradePoints = data.upgradePoints;
-            level = data.level;
-
-            foreach (Transform child in guns)  {
-                if (child.name == "pistol") {
-                    child.GetComponent<gun_scr>().ammo = data.pistol_ammo;
-                } else if (child.name == "assault rifle") {
-                    child.GetComponent<gun_scr>().ammo = data.ak_ammo;
-                } else if (child.name == "shotgun") {
-                    child.GetComponent<gun_scr>().ammo = data.shotgun_ammo;
-                } else if (child.name == "sniper") {
-                    child.GetComponent<gun_scr>().ammo = data.sniper_ammo;
-                }
-            }
-        }
+        // if (saveSystemController.checkSaveFile()) {
+        //     playerData data = saveSystemController.loadPlayer();
+        //     max_hp = data.max_hp;
+        //     hp = data.hp;
+        //     max_freeze = data.max_freeze;
+        //     freeze = data.freeze;
+        //     xp = data.xp;
+        //     max_xp = data.max_xp;
+        //     upgradePoints = data.upgradePoints;
+        //     level = data.level;
+        //
+        //     foreach (Transform child in guns)  {
+        //         if (child.name == "pistol") {
+        //             child.GetComponent<gun_scr>().ammo = data.pistol_ammo;
+        //         } else if (child.name == "assault rifle") {
+        //             child.GetComponent<gun_scr>().ammo = data.ak_ammo;
+        //         } else if (child.name == "shotgun") {
+        //             child.GetComponent<gun_scr>().ammo = data.shotgun_ammo;
+        //         } else if (child.name == "sniper") {
+        //             child.GetComponent<gun_scr>().ammo = data.sniper_ammo;
+        //         }
+        //     }
+        // }
 
         freeze_bar.set_max_freeze(max_freeze);
         hp_bar.set_max_hp(max_hp);
@@ -183,6 +199,31 @@ public class player : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + move * spd * Time.fixedDeltaTime);
+
+        if (is_slow) {
+            spd = og_spd * slow;
+            if (slow_timer <= 0) {
+                is_slow = false;
+                slow_timer = slow_cooldown;
+            } else {
+                slow_timer -= Time.deltaTime;
+            }
+        } else {
+            spd = og_spd;
+        }
+
+        if (can_freeze == false) {
+            freeze_bar.bar.enabled = false;
+            if (can_freeze_timer <= 0) {
+                can_freeze = true;
+                can_freeze_timer = can_freeze_cooldown;
+            } else {
+                can_freeze_timer -= Time.deltaTime;
+            }
+        } else {
+            freeze_bar.bar.enabled = true;
+        }
+
         if (knockback) {
             if (knockback_timer >= 0) {
                 trans.position += (knockback_dir*10) * Time.deltaTime;
@@ -190,6 +231,17 @@ public class player : MonoBehaviour
             } else {
                 knockback_timer = knockback_cooldown;
                 knockback = false;
+            }
+        }
+
+        if (shock) {
+            if (is_freeze == false) {
+                if (shock_cooldown <= 0) {
+                    hp -= 10;
+                    shock_cooldown = shock_timer;
+                } else {
+                    shock_cooldown -= Time.deltaTime;
+                }
             }
         }
     }
@@ -236,7 +288,7 @@ public class player : MonoBehaviour
         }
 
         if ((Input.GetAxis("mouse x") != 0 || Input.GetAxis("mouse y") != 0)) {
-            mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
+            mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 gun_pos = new Vector2(gun.position.x, gun.position.y);
             Vector2 lookdir = mousepos - gun_pos;
             rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
@@ -263,7 +315,7 @@ public class player : MonoBehaviour
         if (Input.GetButton("aim") || Input.GetAxisRaw("aim") < 0) {
             if (can_shoot) {
                 lr.enabled = true;
-                RaycastHit2D hit = Physics2D.Raycast(barrel.position, barrel.TransformDirection(Vector2.up), Mathf.Infinity, Physics2D.DefaultRaycastLayers, -5, 5);
+                RaycastHit2D hit = Physics2D.Raycast(barrel.position, barrel.TransformDirection(Vector2.up), Mathf.Infinity, Physics2D.DefaultRaycastLayers, -50, 50);
                 List<Vector3> pos = new List<Vector3>();
                 pos.Add(barrel.position);
                 if (hit.collider != null) {
@@ -273,14 +325,14 @@ public class player : MonoBehaviour
                 }
                 lr.startColor = Color.red;
                 lr.endColor = Color.red;
-                lr.startWidth = 0.05f;
-                lr.endWidth = 0.05f;
+                lr.startWidth = 0.1f;
+                lr.endWidth = 0.1f;
                 lr.SetPositions(pos.ToArray());
                 lr.useWorldSpace = true;
                 if (weapons[(int)weapon] == "sniper") {
-                    cam.orthographicSize = 12f;
+                    Camera.main.orthographicSize = 12f;
                 } else {
-                    cam.orthographicSize = 8.83f;
+                    Camera.main.orthographicSize = 8.83f;
                 }
             } else {
                 lr.enabled = false;
@@ -289,7 +341,7 @@ public class player : MonoBehaviour
 
         if (Input.GetButtonUp("aim") || Input.GetAxisRaw("aim") == 0) {
             lr.enabled = false;
-            cam.orthographicSize = 8.83f;
+            Camera.main.orthographicSize = 8.83f;
         }
 
         if (Input.GetButtonDown("knife")) {
@@ -305,7 +357,7 @@ public class player : MonoBehaviour
         }
 
         if (Input.GetButtonDown("freeze")) {
-            if (is_freeze == false) {
+            if (is_freeze == false && can_freeze) {
                 is_freeze = true;
                 filter.enabled = true;
 
@@ -340,7 +392,7 @@ public class player : MonoBehaviour
         }
 
         if (Input.GetButtonDown("gernade")) {
-            gernade_scr.throw_gernade();
+            gernade_scr.throw_gernade(gameObject);
         }
 
         if (Input.GetButtonDown("pause")) {
@@ -348,6 +400,7 @@ public class player : MonoBehaviour
         }
 
         if (xp >= max_xp) {
+            level++;
             upgradePoints++;
             max_xp = xp+20;
             xp = xp - max_xp;
@@ -364,6 +417,7 @@ public class player : MonoBehaviour
         lr.enabled = false;
         knockback = false;
         move = new Vector2(0, 0);
+        rb.velocity = new Vector2(0, 0);
         // Destroy(gameObject);
     }
 
@@ -385,5 +439,13 @@ public class player : MonoBehaviour
         knockback_dir = (trans.position-new Vector3(info.x, info.y, 0f));
         knockback_dir.z = 0f;
         knockback = true;
+    }
+
+    public void shockStart() {
+        shock = true;
+    }
+
+    public void shockEnd() {
+        shock = false;
     }
 }

@@ -31,6 +31,7 @@ public class darkness : MonoBehaviour {
         Transform camera_trans = cam.GetComponent<Transform>();
         GameObject bg_cam = Instantiate(bg, camera_trans.position, camera_trans.rotation);
         bg_cam.GetComponent<Transform>().parent = camera_trans;
+        cam.GetComponent<Camera>().backgroundColor = Color.black;
 
         foreach (GameObject player_obj in GameObject.FindGameObjectsWithTag("Player")) {
             Transform trans = player_obj.GetComponent<Transform>();
@@ -42,7 +43,6 @@ public class darkness : MonoBehaviour {
 
         foreach (GameObject enemy_obj in GameObject.FindGameObjectsWithTag("enemy")) {
             Transform trans = enemy_obj.GetComponent<Transform>();
-            Instantiate(humanLight, trans.position, trans.rotation);
             GameObject light = Instantiate(humanLight, trans.position, trans.rotation);
             light.GetComponent<Transform>().parent = trans;
             light.SetActive(true);

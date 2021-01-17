@@ -9,6 +9,7 @@ TagManager:
   - bullet
   - gernade
   - pause
+  - traps
   layers:
   - Default
   - TransparentFX
