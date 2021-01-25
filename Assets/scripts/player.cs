@@ -36,6 +36,7 @@ public class player : MonoBehaviour
     public gun_scr gun_scr;
     public Transform guns;
     public float weapon = 0;
+    public float max_weapons = 0;
     public List<string> weapons = new List<string>();
     public knife_scr knife_scr;
     public tase_scr tase_scr;
@@ -64,11 +65,20 @@ public class player : MonoBehaviour
     public float slow_cooldown;
     public bool dual_wield = false;
     public saveSystem saveSystemController = new saveSystem();
+    public GameObject deathScreen;
 
     Vector2 move;
     Vector2 mousepos;
 
     void changeWeapon() {
+
+        if (weapon > max_weapons) {
+            weapon = 0;
+        }
+        if (weapon < 0) {
+            weapon = max_weapons;
+        }
+
         foreach (Transform child in guns) {
             if (weapons[(int)weapon] == child.name) {
                 child.gameObject.SetActive(true);
@@ -123,6 +133,7 @@ public class player : MonoBehaviour
         //     max_xp = data.max_xp;
         //     upgradePoints = data.upgradePoints;
         //     level = data.level;
+        //     max_weapons = data.max_weapons;
         //
         //     foreach (Transform child in guns)  {
         //         if (child.name == "pistol") {
@@ -147,7 +158,7 @@ public class player : MonoBehaviour
             Invoke(state, 0f);
         }
 
-        if (hp <= 0) {
+        if (hp <= 0 && state != "cutsceneState") {
             hp = 0;
             state = "deathState";
         }
@@ -258,12 +269,6 @@ public class player : MonoBehaviour
 
         if (Input.GetAxis("scroll wheel") != 0) {
             weapon += Input.GetAxis("scroll wheel");
-            if (weapon > weapons.Count-1) {
-                weapon = 0;
-            }
-            if (weapon < 0) {
-                weapon = weapons.Count-1;
-            }
             changeWeapon();
         }
 
@@ -418,6 +423,8 @@ public class player : MonoBehaviour
         knockback = false;
         move = new Vector2(0, 0);
         rb.velocity = new Vector2(0, 0);
+        Instantiate(deathScreen, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+        state = "cutsceneState";
         // Destroy(gameObject);
     }
 

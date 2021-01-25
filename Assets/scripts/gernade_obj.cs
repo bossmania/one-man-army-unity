@@ -36,6 +36,7 @@ public class gernade_obj : MonoBehaviour
                     dis.z = 0;
                     if (dis.magnitude < 3) {
                         enemy.SendMessage("takeDamage", 70);
+                        //insert explosion here.
                     }
                 }
             }
@@ -46,6 +47,7 @@ public class gernade_obj : MonoBehaviour
                     dis.z = 0;
                     if (dis.magnitude < 3) {
                         player.SendMessage("takeDamage", 70);
+                        //insert explosion here.
                     }
                 }
             }

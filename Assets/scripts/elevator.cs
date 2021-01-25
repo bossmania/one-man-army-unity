@@ -22,7 +22,7 @@ public class elevator : MonoBehaviour
                 enemy enemy_scr = enemy_obj.GetComponent<enemy>();
                 if (enemy_scr == null) {
                     brawler brawler_scr = enemy_obj.GetComponent<brawler>();
-                    if (brawler_scr.state == "deathState") {
+                    if (brawler_scr.dead) {
                         dead++;
                     }
                 } else {
@@ -38,11 +38,12 @@ public class elevator : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        if (type == "exit" && col.gameObject.tag == "Player" ) {
+        if (type == "exit" && col.gameObject.tag == "Player") {
             player player_scr = col.GetComponent<player>();
             player_scr.state = "cutsceneState";
             player_scr.xp += 30;
             player_scr.gameLevel++;
+
             foreach (GameObject enemy_obj in GameObject.FindGameObjectsWithTag("enemy")) {
                 enemy enemy_scr = enemy_obj.GetComponent<enemy>();
                 if (enemy_scr == null) {
@@ -52,7 +53,25 @@ public class elevator : MonoBehaviour
                     enemy_scr.state = "cutsceneState";
                 }
             }
-            Instantiate(xpUI, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+
+            // saveSystem saveSystemController = new saveSystem();
+            // saveSystemController.setPath(Path.Combine(Application.persistentDataPath, "nothing.nothing"));
+            // saveSystemController.savePlayer(player_scr);
+
+            GameObject xp = Instantiate(xpUI, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+            xp_ui xp_scr = xp.GetComponent<xp_ui>();
+            if (player_scr.gameLevel == 5) {
+                xp_scr.dest = 2;
+                player_scr.max_weapons = 1;
+            } else if (player_scr.gameLevel == 10) {
+                xp_scr.dest = 3;
+                player_scr.max_weapons = 2;
+            } else if (player_scr.gameLevel == 15) {
+                xp_scr.dest = 4;
+                player_scr.max_weapons = 3;
+            } else {
+                xp_scr.dest = 1;
+            }
         }
     }
     void OnTriggerExit2D(Collider2D col) {

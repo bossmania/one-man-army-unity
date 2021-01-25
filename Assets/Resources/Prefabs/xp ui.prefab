@@ -1540,6 +1540,7 @@ MonoBehaviour:
   player_scr: {fileID: 0}
   loadingScreen: {fileID: 8773007897135429907, guid: 0c6fcf630dae3334fb2f19bc96519dbe,
     type: 3}
+  dest: 0
 --- !u!1 &3199397362332849107
 GameObject:
   m_ObjectHideFlags: 0

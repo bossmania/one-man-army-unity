@@ -10,6 +10,7 @@ public class xp_ui : MonoBehaviour
     public GameObject[] bg = new GameObject[5];
     public player player_scr;
     public GameObject loadingScreen;
+    public int dest;
     int selected = 0;
     bool mouseInput = true;
     bool axis_move = false;
@@ -108,7 +109,7 @@ public class xp_ui : MonoBehaviour
     public void exit() {
         GameObject loadingScreenObj = Instantiate(loadingScreen, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
         loading loadingScreen_scr = loadingScreenObj.GetComponent<loading>();
-        loadingScreen_scr.dest = 1;
+        loadingScreen_scr.dest = dest;
     }
 
     public void onMouseEnter(GameObject obj) {

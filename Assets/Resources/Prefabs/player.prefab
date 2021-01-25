@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7677553760709560725
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2151358277393514114}
-  m_Layer: 0
-  m_Name: guns that is not used
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2151358277393514114
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7677553760709560725}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.96000004}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9040689163527664654}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9040689163527664651
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +34,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9040689164090828057}
-  - {fileID: 2151358277393514114}
   - {fileID: 9040689164786503962}
   - {fileID: 9040689164974432558}
   - {fileID: 9040689164576806761}
@@ -200,6 +169,7 @@ MonoBehaviour:
   gun_scr: {fileID: 0}
   guns: {fileID: 9040689164090828057}
   weapon: 0
+  max_weapons: 0
   weapons: []
   knife_scr: {fileID: 9040689164786503960}
   tase_scr: {fileID: 9040689164974432557}
@@ -216,7 +186,7 @@ MonoBehaviour:
   shock: 0
   xp: 0
   max_xp: 30
-  upgradePoints: 10
+  upgradePoints: 0
   level: 1
   gameLevel: 1
   hp_bonus: 1
@@ -1232,7 +1202,7 @@ RectTransform:
   m_Children:
   - {fileID: 9040689165108552567}
   m_Father: {fileID: 9040689163527664654}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1647,8 +1617,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9040689165465467322}
-  - {fileID: 9040689165253539741}
   - {fileID: 9040689164383362873}
+  - {fileID: 9040689165253539741}
   - {fileID: 9040689164835307591}
   m_Father: {fileID: 9040689163527664654}
   m_RootOrder: 0
@@ -1765,7 +1735,7 @@ Transform:
   - {fileID: 9040689163630733360}
   - {fileID: 9040689164063138729}
   m_Father: {fileID: 9040689164090828057}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9040689164383362872
 MonoBehaviour:
@@ -1830,7 +1800,7 @@ RectTransform:
   - {fileID: 9040689164082551262}
   - {fileID: 9040689165585105733}
   m_Father: {fileID: 9040689163527664654}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2077,7 +2047,7 @@ Transform:
   m_LocalScale: {x: 1.2554768, y: 0.6131713, z: 1.1638368}
   m_Children: []
   m_Father: {fileID: 9040689163527664654}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9040689164786503961
 SpriteRenderer:
@@ -2529,7 +2499,7 @@ Transform:
   m_LocalScale: {x: 1.2554768, y: 0.6131713, z: 1.1638368}
   m_Children: []
   m_Father: {fileID: 9040689163527664654}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9040689164974432531
 SpriteRenderer:
@@ -2868,7 +2838,7 @@ Transform:
   - {fileID: 9040689164994393102}
   - {fileID: 9040689163529821215}
   m_Father: {fileID: 9040689164090828057}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9040689165253539740
 MonoBehaviour:

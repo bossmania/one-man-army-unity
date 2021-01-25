@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Random Level.unity
     guid: 875fd48dfe5c14348a5e764c1cb8cbce
+  - enabled: 1
+    path: Assets/Scenes/gernade launcher boss.unity
+    guid: ee76c1025c961d44fa12f7f1c78124eb
+  - enabled: 1
+    path: Assets/Scenes/minigun boss.unity
+    guid: 207c198cd9c07d74c96380f24e442b4b
+  - enabled: 1
+    path: Assets/Scenes/camo boss.unity
+    guid: e88dfdc5ede3c754284c8284df2cf3a6
   m_configObjects: {}

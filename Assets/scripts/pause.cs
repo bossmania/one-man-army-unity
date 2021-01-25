@@ -57,7 +57,7 @@ public class pause : MonoBehaviour
     }
 
     public void mainMenu() {
-        Debug.Log("this would take you to the main menu, but it dosent existest right now, so add it in right now.");
+        Debug.Log("this would take you to the main menu, but it dosent exist right now, so add it in right now.");
     }
 
     public void exit() {

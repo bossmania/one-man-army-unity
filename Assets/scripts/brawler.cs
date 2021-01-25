@@ -31,7 +31,7 @@ public class brawler : MonoBehaviour
     public float shock_timer;
     public float shock_cooldown;
     public bool shock = false;
-    public bool dead = true;
+    public bool dead = false;
     public bool is_slow;
     public float slow;
     public float slow_timer;

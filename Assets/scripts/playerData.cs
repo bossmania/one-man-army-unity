@@ -18,7 +18,7 @@ public class playerData
     public float freeze_bonus;
     public float damage_bonus;
     public bool dual_wield;
-
+    public float max_weapons;
     public int pistol_ammo;
     public int ak_ammo;
     public int shotgun_ammo;
@@ -39,6 +39,7 @@ public class playerData
         freeze_bonus = player_scr.freeze_bonus;
         damage_bonus = player_scr.damage_bonus;
         dual_wield = player_scr.dual_wield;
+        max_weapons = player_scr.max_weapons;
 
         foreach (Transform child in player_scr.guns)  {
             if (child.name == "pistol") {
