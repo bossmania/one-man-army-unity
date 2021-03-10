@@ -7,6 +7,8 @@ public class elevator : MonoBehaviour
     public string type;
     public BoxCollider2D collideBox;
     public GameObject xpUI;
+    public GameObject arrow;
+    public bool arrow_spawn = false;
 
     void Start()
     {
@@ -33,6 +35,10 @@ public class elevator : MonoBehaviour
             }
             if (dead == GameObject.FindGameObjectsWithTag("enemy").Length) {
                 collideBox.enabled = false;
+                if (arrow_spawn == false) {
+                  Instantiate(arrow, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+                  arrow_spawn = true;
+                }
             }
         }
     }
@@ -60,6 +66,7 @@ public class elevator : MonoBehaviour
 
             GameObject xp = Instantiate(xpUI, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
             xp_ui xp_scr = xp.GetComponent<xp_ui>();
+            xp_scr.mode = "in";
             if (player_scr.gameLevel == 5) {
                 xp_scr.dest = 2;
                 player_scr.max_weapons = 1;

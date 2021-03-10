@@ -6,67 +6,93 @@ using UnityEngine.UI;
 
 public class xp_ui : MonoBehaviour
 {
+    public GameObject canvas_group;
     public GameObject[] options = new GameObject[5];
     public GameObject[] bg = new GameObject[5];
     public player player_scr;
     public GameObject loadingScreen;
+    public string mode = "in";
+    public float spd;
     public int dest;
     int selected = 0;
     bool mouseInput = true;
     bool axis_move = false;
+    float move_y = -320f;
+    bool input = false;
 
     void Start() {
         player_scr = GameObject.FindGameObjectWithTag("Player").GetComponent<player>();
+        canvas_group.GetComponent<RectTransform>().position = new Vector3(canvas_group.GetComponent<RectTransform>().position.x, move_y, 0);
+
     }
 
     void Update() {
-
-        if ((Input.GetAxis("mouse x") != 0 || Input.GetAxis("mouse y") != 0)) {
-            mouseInput = true;
+      if (input == false) {
+        if (mode == "in") {
+          if (move_y < 0) {
+                move_y += spd;
+              } else {
+                move_y = 0;
+                mode = "stay";
+              }
+        } else if (mode == "out") {
+          if (move_y > -320) {
+              move_y -= spd;
+          } else {
+            move_y = -320;
+            mode = "stay";
+          }
         }
-        if ((Input.GetAxis("ver") != 0 || Input.GetAxis("hor") != 0) && mouseInput == true) {
-            mouseInput = false;
-            selected = 100;
-        }
+        Vector3 position = canvas_group.GetComponent<RectTransform>().anchoredPosition;
+        canvas_group.GetComponent<RectTransform>().anchoredPosition = new Vector2(position.x, move_y);
+      } else {
+          if ((Input.GetAxis("mouse x") != 0 || Input.GetAxis("mouse y") != 0)) {
+              mouseInput = true;
+          }
+          if ((Input.GetAxis("ver") != 0 || Input.GetAxis("hor") != 0) && mouseInput == true) {
+              mouseInput = false;
+              selected = 100;
+          }
 
-        if (mouseInput == false) {
-            if(Input.GetAxisRaw("hor") != 0) {
-                if(axis_move == false && selected != -4) {
-                    if (Input.GetAxisRaw("hor") > 0) {
-                        selected += 1;
-                    } else if (Input.GetAxisRaw("hor") < 0) {
-                        selected -= 1;
-                    }
-                    axis_move = true;
-                }
-            } if (Input.GetAxisRaw("hor") == 0) {
-                axis_move = false;
-            }
+          if (mouseInput == false) {
+              if(Input.GetAxisRaw("hor") != 0) {
+                  if(axis_move == false && selected != -4) {
+                      if (Input.GetAxisRaw("hor") > 0) {
+                          selected += 1;
+                      } else if (Input.GetAxisRaw("hor") < 0) {
+                          selected -= 1;
+                      }
+                      axis_move = true;
+                  }
+              } if (Input.GetAxisRaw("hor") == 0) {
+                  axis_move = false;
+              }
 
-            if (selected > options.Length-1) {
-                selected = 0;
-            }
-            if (selected < 0 && selected != -4) {
-                selected = options.Length-1;
-            }
+              if (selected > options.Length-1) {
+                  selected = 0;
+              }
+              if (selected < 0 && selected != -4) {
+                  selected = options.Length-1;
+              }
 
-            for (int i=0; i<bg.Length; i++) {
-                bg[i].SetActive(false);
-            }
-            if (selected != -4) {
-                bg[selected].SetActive(true);
-            }
+              for (int i=0; i<bg.Length; i++) {
+                  bg[i].SetActive(false);
+              }
+              if (selected != -4) {
+                  bg[selected].SetActive(true);
+              }
 
 
-            if (Input.GetButtonDown("Submit")) {
-                if (selected != -4) {
-                options[selected].GetComponent<Button>().onClick.Invoke();
-                }
-            }
+              if (Input.GetButtonDown("Submit")) {
+                  if (selected != -4) {
+                  options[selected].GetComponent<Button>().onClick.Invoke();
+                  }
+              }
 
-            if (Input.GetButtonDown("Cancel")) {
-                Destroy(gameObject);
-            }
+              if (Input.GetButtonDown("Cancel")) {
+                  Destroy(gameObject);
+              }
+          }
         }
     }
 

@@ -41,6 +41,7 @@ public class enemy : MonoBehaviour
     public float slow_cooldown;
     public float spd;
     public float og_spd;
+    public Animator animator;
 
     GameObject traps;
 
@@ -127,7 +128,8 @@ public class enemy : MonoBehaviour
         }
 
         hp_bar.set_hp(hp);
-
+        animator.SetBool("is dead", dead);
+        animator.SetBool("is reload", gun_scr.reload);
     }
 
     void OnCollisionEnter2D(Collision2D col) {
@@ -170,7 +172,7 @@ public class enemy : MonoBehaviour
 
         if (gameObject.name == "camo boss") {
             GetComponent<SpriteRenderer>().enabled = false;
-            gun.GetComponent<SpriteRenderer>().enabled = false;
+            // gun.GetComponent<SpriteRenderer>().enabled = false;
             trans.GetChild(1).GetComponent<Canvas>().enabled = false;
         }
 
@@ -183,12 +185,13 @@ public class enemy : MonoBehaviour
         aipath.canMove = false;
         if (gameObject.name == "camo boss") {
             GetComponent<SpriteRenderer>().enabled = true;
-            gun.GetComponent<SpriteRenderer>().enabled = true;
+            // gun.GetComponent<SpriteRenderer>().enabled = true;
             trans.GetChild(1).GetComponent<Canvas>().enabled = true;
         }
     }
 
     public void cutsceneState() {
+        rb.velocity = new Vector2(0, 0);
         aipath.canMove = false;
         if (lr != null) {
             lr.enabled = false;
@@ -199,18 +202,21 @@ public class enemy : MonoBehaviour
         desSetter.target = null;
         aipath.canMove = false;
         knockback = false;
-        GetComponent<SpriteRenderer>().enabled = false;
         player_scr.xp += 10;
         hp = 0;
         dead = true;
         rb.velocity = new Vector2(0, 0);
-        Debug.Log("Im Dead, lol");
         state = "cutsceneState";
+        Vector2 dir = target.position - trans.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        trans.rotation = Quaternion.Euler(0, 0, angle - 90);
+        GetComponent<SpriteRenderer>().enabled = true;
+        Debug.Log("Im Dead, lol");
         // Destroy(gameObject);
     }
 
     public void staggerState() {
-        gun.GetComponent<SpriteRenderer>().enabled = false;
+        //gun.GetComponent<SpriteRenderer>().enabled = false;
         aipath.canMove = false;
         if (stagger_cooldown > 0) {
             if (stagger_flash_cooldown <= 0) {
@@ -225,7 +231,7 @@ public class enemy : MonoBehaviour
             stagger_flash_cooldown -= Time.deltaTime;
         } else {
             stagger_cooldown = stagger_timer;
-            gun.GetComponent<SpriteRenderer>().enabled = true;
+            // gun.GetComponent<SpriteRenderer>().enabled = true;
             GetComponent<SpriteRenderer>().enabled = true;
             hp = max_hp*0.4f;
             state = "chaseState";

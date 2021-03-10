@@ -13,11 +13,11 @@ public class bullet : MonoBehaviour
     public string state;
     public CircleCollider2D col;
     public Rigidbody2D rb;
-    public bool applyForce = false;
+    public float rad;
 
     void Start() {
         death_countdown = death_timer;
-        col.radius = 1 + (spd * 1.25f);
+        rad = spd + 1.3f;
     }
 
     void Update() {
@@ -29,6 +29,10 @@ public class bullet : MonoBehaviour
         }
     }
 
+    void OnDrawGizmos() {
+      Gizmos.DrawWireSphere(transform.position, rad);
+    }
+
     void moveState() {
         trans.position += (trans.up*spd);
         col.enabled = true;
@@ -38,12 +42,11 @@ public class bullet : MonoBehaviour
     void freezeState() {
         col.enabled = false;
         rb.velocity = new Vector2(0, 0);
-        applyForce = false;
     }
 
-    void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.tag != "bullet") {
-            col.gameObject.SendMessage("takeDamage", damage);
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag != "bullet") {
+            other.gameObject.SendMessage("takeDamage", damage);
             Destroy(gameObject);
         }
     }

@@ -83,7 +83,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 718316268084017175}
-  - component: {fileID: 2672409480069660420}
   - component: {fileID: 6394885897283553857}
   m_Layer: 0
   m_Name: gun
@@ -107,56 +106,6 @@ Transform:
   m_Father: {fileID: 4879723460864612250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!212 &2672409480069660420
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2825954960377085995}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2011724891
-  m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6e9067ead8184ed488ec32e5e1d3b081, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1.82, y: 0.38}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 1
 --- !u!114 &6394885897283553857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet_prefab: {fileID: 1407856483140768472, guid: 1664500f9ffe95d40b9a32ce7429d15b,
     type: 3}
+  muzzle: {fileID: 6411763399932270434, guid: 6dc99cd5560051d47af48e4380d0790a, type: 3}
   clip: 30
   ammo: 2147483647
   max_clip: 0
@@ -440,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3316512969681450804}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.98, y: -0.06, z: 0}
+  m_LocalPosition: {x: -2.073, y: -0.123, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 718316268084017175}
@@ -588,12 +538,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4879723460864612250}
   - component: {fileID: 8704850055512791329}
-  - component: {fileID: 7171308507112849068}
+  - component: {fileID: -2319121972814133344}
   - component: {fileID: 3213725904747132187}
   - component: {fileID: 1564545569910247738}
   - component: {fileID: 4704619770559918152}
   - component: {fileID: 4816342013331658620}
   - component: {fileID: 2497279289758483443}
+  - component: {fileID: 1560025392861791358}
   m_Layer: 0
   m_Name: ak enemy
   m_TagString: enemy
@@ -656,8 +607,8 @@ SpriteRenderer:
   m_SortingLayerID: 2011724891
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b1b75bd4bc2db7c4c8f4619dfd19737c, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 00f854d3f20bf62498aea0f91cfd4199, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -667,8 +618,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &7171308507112849068
-CircleCollider2D:
+--- !u!70 &-2319121972814133344
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -680,9 +631,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Offset: {x: -0.09390074, y: -0.00999999}
+  m_Size: {x: 0.9775773, y: 1.485696}
+  m_Direction: 0
 --- !u!50 &3213725904747132187
 Rigidbody2D:
   serializedVersion: 4
@@ -751,6 +702,7 @@ MonoBehaviour:
   slow_cooldown: 0
   spd: 3.5
   og_spd: 0
+  animator: {fileID: 1560025392861791358}
 --- !u!114 &4704619770559918152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,6 +781,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+--- !u!95 &1560025392861791358
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351523546583738184}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de87436c17b822441b3bfc5ad66274dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7521279080638523339
 GameObject:
   m_ObjectHideFlags: 0

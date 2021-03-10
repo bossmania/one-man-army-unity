@@ -38,6 +38,8 @@ public class brawler : MonoBehaviour
     public float slow_cooldown;
     public float spd;
     public float og_spd;
+    public Animator animator;
+    bool isPunch = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -107,6 +109,8 @@ public class brawler : MonoBehaviour
         }
 
         hp_bar.set_hp(hp);
+        animator.SetBool("is dead", dead);
+        animator.SetBool("is punch", isPunch);
     }
 
     public void chaseState() {
@@ -125,6 +129,7 @@ public class brawler : MonoBehaviour
 
     public void cutsceneState() {
         aipath.canMove = false;
+        rb.velocity = new Vector2(0, 0);
     }
 
     public void deathState() {

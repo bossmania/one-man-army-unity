@@ -11,6 +11,7 @@ public class loading : MonoBehaviour
     {
         player player_scr = GameObject.FindWithTag("Player").GetComponent<player>();
         player_scr.saveSystemController.savePlayer(player_scr);
+        // GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<CanvasRenderer>().SetAlpha(0.1f);
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadSceneAsync(dest);
     }

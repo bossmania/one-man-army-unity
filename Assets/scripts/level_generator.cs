@@ -42,30 +42,31 @@ public class level_generator : MonoBehaviour
         Object[] enemies = Resources.LoadAll("Prefabs/enemies");
         maxEnemies = player_scr.gameLevel + Random.Range(0, 3);
 
-        if (player_scr.gameLevel > 3) {
-            int num = Random.Range(0, 10);
-            if (num <= 6) {
-                type = null;
-            } else {
-                if (num == 7) {
-                    type = "dark";
-                } else if (num == 8) {
-                    type = "water";
-                } else if (num == 9) {
-                    type = "claymore";
-                }
-            }
-        }
-
-        Debug.Log(type);
-
-        int[,] grid = new int[GRID_SIZE, GRID_SIZE];
-        int x = GRID_SIZE/2;
-        int y = GRID_SIZE/2;
 
         while (true) {
             try
             {
+                if (player_scr.gameLevel > 3) {
+                    int num = Random.Range(0, 10);
+                    if (num <= 6) {
+                        type = null;
+                    } else {
+                        if (num == 7) {
+                            type = "dark";
+                        } else if (num == 8) {
+                            type = "water";
+                        } else if (num == 9) {
+                            type = "claymore";
+                        }
+                    }
+                }
+
+                Debug.Log(type);
+
+                int[,] grid = new int[GRID_SIZE, GRID_SIZE];
+                int x = GRID_SIZE/2;
+                int y = GRID_SIZE/2;
+
                 for (int i=0; i<tiles; i++) {
                     int dir = Random.Range(1, 5);
                     switch (dir) {
@@ -212,7 +213,7 @@ public class level_generator : MonoBehaviour
                             }
 
                             float dis = Vector3.Distance(floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)), player_trans.position);
-                            if (Random.Range(1, 20) == 1 && dis >= 20 && enemy < maxEnemies) {
+                            if (Random.Range(1, 20) == 1 && dis >= 15 && enemy < maxEnemies) {
                                 int type = Random.Range(0, enemies.Length-1);
                                 Instantiate(enemies[type], floor_tilemap.CellToWorld(new Vector3Int(i, j, -3)), new Quaternion(0, 0, 0, 0));
                                 enemy++;
@@ -230,7 +231,7 @@ public class level_generator : MonoBehaviour
                 break;
 
             }
-            catch (System.IndexOutOfRangeException e)
+            catch (System.Exception e)
             {
                 Debug.Log("We avoided a level that didnt generated");
                 Debug.Log(e);
@@ -238,6 +239,7 @@ public class level_generator : MonoBehaviour
             }
         }
     }
+
 
     void Update() {
         wait -= Time.deltaTime;

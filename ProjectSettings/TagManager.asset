@@ -10,6 +10,7 @@ TagManager:
   - gernade
   - pause
   - traps
+  - elevator
   layers:
   - Default
   - TransparentFX

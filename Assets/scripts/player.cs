@@ -66,9 +66,11 @@ public class player : MonoBehaviour
     public bool dual_wield = false;
     public saveSystem saveSystemController = new saveSystem();
     public GameObject deathScreen;
+    public Animator animator;
 
     Vector2 move;
     Vector2 mousepos;
+    bool dead = false;
 
     void changeWeapon() {
 
@@ -204,6 +206,12 @@ public class player : MonoBehaviour
 
         freeze_bar.set_freeze(freeze);
         hp_bar.set_hp(hp);
+
+        animator.SetInteger("weapon", (int)weapon);
+        animator.SetBool("is dual", dual_wield);
+        animator.SetBool("is dead", dead);
+        animator.SetBool("is reload", gun_scr.reload);
+
     }
 
 
@@ -330,8 +338,8 @@ public class player : MonoBehaviour
                 }
                 lr.startColor = Color.red;
                 lr.endColor = Color.red;
-                lr.startWidth = 0.1f;
-                lr.endWidth = 0.1f;
+                lr.startWidth = 0.05f;
+                lr.endWidth = 0.05f;
                 lr.SetPositions(pos.ToArray());
                 lr.useWorldSpace = true;
                 if (weapons[(int)weapon] == "sniper") {
@@ -423,14 +431,30 @@ public class player : MonoBehaviour
         knockback = false;
         move = new Vector2(0, 0);
         rb.velocity = new Vector2(0, 0);
-        Instantiate(deathScreen, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
         state = "cutsceneState";
+        dead = true;
+        GetComponent<SpriteRenderer>().enabled = true;
+        
+        if ((Input.GetAxis("mouse x") != 0 || Input.GetAxis("mouse y") != 0)) {
+            mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 gun_pos = new Vector2(gun.position.x, gun.position.y);
+            Vector2 lookdir = mousepos - gun_pos;
+            rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
+        }
+
+        if ((Input.GetAxis("right x") != 0 || Input.GetAxis("right y") != 0)) {
+            Vector2 lookdir = new Vector2(Input.GetAxis("right x"), Input.GetAxis("right y"));
+            rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
+        }
+
+        // Instantiate(deathScreen, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
         // Destroy(gameObject);
     }
 
     void cutsceneState() {
         filter.enabled = false;
         lr.enabled = false;
+        rb.velocity = new Vector2(0, 0);
     }
 
     public void takeDamage(float damage) {

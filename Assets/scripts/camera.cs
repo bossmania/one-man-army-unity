@@ -8,6 +8,7 @@ public class camera : MonoBehaviour
     public Transform trans;
     public Transform player;
     public int mouseRadius;
+    public string state = "moveState";
     bool mouse = true;
 
     void Start() {
@@ -18,8 +19,20 @@ public class camera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+      if (state != "null") {
+          Invoke(state, 0f);
+      }
+
+      player player_scr = GameObject.FindGameObjectWithTag("Player").GetComponent<player>();
+      if (player_scr.state == "cutsceneState") {
+        state = "cutsceneState";
+      } else {
+        state = "moveState";
+      }
+    }
+
+    void moveState() {
         if (player == null) {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         }
@@ -44,5 +57,8 @@ public class camera : MonoBehaviour
             Vector3 pos = player.position + dir;
             trans.position = new Vector3(pos.x, pos.y, trans.position.z);
         }
+    }
+    void cutsceneState() {
+
     }
 }

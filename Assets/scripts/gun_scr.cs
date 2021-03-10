@@ -5,6 +5,7 @@ using UnityEngine;
 public class gun_scr : MonoBehaviour
 {
     public GameObject bullet_prefab;
+    public GameObject muzzle;
     public int clip;
     public int ammo;
     public int max_clip;
@@ -70,6 +71,8 @@ public class gun_scr : MonoBehaviour
                 GameObject bullet_obj = Instantiate(bullet_prefab, barrel.position, barrel.rotation);
                 bullet bullet_scr = bullet_obj.GetComponent<bullet>();
                 bullet_scr.damage = damage;
+                GameObject muzzle_obj = Instantiate(muzzle, barrel.position, barrel.rotation);
+                muzzle_obj.GetComponent<Transform>().SetParent(barrel);
 
                 if (dual) {
                     shoot_cooldown = shoot_timer;

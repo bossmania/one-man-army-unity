@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8452037186748303706}
   m_Layer: 8
   m_Name: elevator
-  m_TagString: Untagged
+  m_TagString: elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,11 +103,11 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.6196383, y: 0.64720476}
   - {x: -0.62508595, y: -0.63024026}
-  - {x: 0.75028884, y: -0.6317755}
+  - {x: 0.7445401, y: -0.6325418}
   - {x: 0.74415684, y: -0.7480725}
-  - {x: -0.7465886, y: -0.7481723}
-  - {x: -0.73019636, y: 0.75973594}
-  - {x: 0.75146425, y: 0.75546384}
+  - {x: -0.7311171, y: -0.7489867}
+  - {x: -0.7366966, y: 0.75063217}
+  - {x: 0.7470859, y: 0.75546384}
   - {x: 0.7405367, y: 0.6461884}
   - {x: -0.60354984, y: 0.6352608}
 --- !u!61 &1389509951284394422
@@ -149,7 +149,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029612243, y: -0.0023872852}
+  m_Offset: {x: 0.0049741864, y: -0.0023872852}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -160,7 +160,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5351774, y: 1.5032744}
+  m_Size: {x: 1.4859012, y: 1.5032744}
   m_EdgeRadius: 0
 --- !u!114 &8452037186748303706
 MonoBehaviour:
@@ -177,3 +177,5 @@ MonoBehaviour:
   type: 
   collideBox: {fileID: 2108910007708334459}
   xpUI: {fileID: 3199397362291869030, guid: a382fb4e627bc2f4e9f4c0faebda4772, type: 3}
+  arrow: {fileID: 3481177727812635474, guid: a9c09aa87c539a449b37373d52dc055f, type: 3}
+  arrow_spawn: 0
