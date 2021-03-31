@@ -21,7 +21,7 @@ public class enemy : MonoBehaviour
     public Transform player;
     public player player_scr;
     public Text weapon;
-    public float chaseDis = 8f;
+    public float shootDis = 8f;
     public LineRenderer lr;
     public float stagger_timer = 7f;
     public float stagger_cooldown;
@@ -160,13 +160,16 @@ public class enemy : MonoBehaviour
             lr.useWorldSpace = true;
         }
 
-        if (gameObject.name != "gernade launcher guy") {
-            gun_scr.shoot(barrel, true);
-        } else {
-            if (gun_scr.shoot_cooldown <= 0) {
-                gun_scr.shoot_cooldown = gun_scr.shoot_timer;
-                gun.GetComponent<gernade_scr>().throw_gernade(gameObject);
-            }
+        RaycastHit2D hit = Physics2D.Raycast(barrel.position, barrel.TransformDirection(Vector2.up), Mathf.Infinity, Physics2D.DefaultRaycastLayers, -50, 50);
+        if (hit.collider == target.gameObject.GetComponent<CapsuleCollider2D>()) {
+          if (gameObject.name != "gernade launcher guy") {
+              gun_scr.shoot(barrel, true);
+          } else {
+              if (gun_scr.shoot_cooldown <= 0) {
+                  gun_scr.shoot_cooldown = gun_scr.shoot_timer;
+                  gun.GetComponent<gernade_scr>().throw_gernade(gameObject);
+              }
+          }
         }
 
 
@@ -208,9 +211,9 @@ public class enemy : MonoBehaviour
         rb.velocity = new Vector2(0, 0);
         state = "cutsceneState";
         Vector2 dir = target.position - trans.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        trans.rotation = Quaternion.Euler(0, 0, angle - 90);
+        rb.rotation -= 90f;
         GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<CapsuleCollider2D>().enabled = false;
         Debug.Log("Im Dead, lol");
         // Destroy(gameObject);
     }

@@ -10,7 +10,7 @@ public class elevator : MonoBehaviour
     public GameObject arrow;
     public bool arrow_spawn = false;
 
-    void Start()
+    void Awake()
     {
         if (type == "start") {
             collideBox.enabled = false;

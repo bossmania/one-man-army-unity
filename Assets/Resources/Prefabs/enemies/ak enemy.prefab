@@ -162,7 +162,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3259119145673486602}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.8012436}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.011102485, y: 0.011102485, z: 0.011102485}
   m_Children:
   - {fileID: 4102123170379232767}
@@ -299,7 +299,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3311494914217833041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -234.1818}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1614903093747635292}
@@ -682,7 +682,7 @@ MonoBehaviour:
   player: {fileID: 0}
   player_scr: {fileID: 0}
   weapon: {fileID: 3969034281248461344}
-  chaseDis: 8
+  shootDis: 8
   lr: {fileID: 0}
   stagger_timer: 10
   stagger_cooldown: 0

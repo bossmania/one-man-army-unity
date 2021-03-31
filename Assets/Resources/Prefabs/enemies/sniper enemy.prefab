@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trans: {fileID: 4635351483655383685}
-  max_hp: 4060
+  max_hp: 60
   hp: 0
   hp_bar: {fileID: 5082733237165311384}
   state: cutsceneState
@@ -782,7 +782,7 @@ MonoBehaviour:
   player: {fileID: 0}
   player_scr: {fileID: 0}
   weapon: {fileID: 3816948679601549119}
-  chaseDis: 14
+  shootDis: 8
   lr: {fileID: 6613945329723464272}
   stagger_timer: 10
   stagger_cooldown: 0

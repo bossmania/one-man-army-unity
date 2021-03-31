@@ -154,7 +154,7 @@ MonoBehaviour:
   player: {fileID: 0}
   player_scr: {fileID: 0}
   weapon: {fileID: 7187197362207555501}
-  chaseDis: 8
+  shootDis: 8
   lr: {fileID: 0}
   stagger_timer: 3
   stagger_cooldown: 0
@@ -610,7 +610,7 @@ MonoBehaviour:
   ammo_text: {fileID: 0}
   reload_timer: 5
   reload_cooldown: 0
-  reload: 1
+  reload: 0
 --- !u!1 &8745446604097429468
 GameObject:
   m_ObjectHideFlags: 0

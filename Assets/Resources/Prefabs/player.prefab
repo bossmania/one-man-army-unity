@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9040689163527664651}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.30215, y: 15.65, z: -11.62}
+  m_LocalPosition: {x: 17.30215, y: 15.65, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9040689164090828057}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 2011724891
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 755ca27f29b4b994893a9df8200e633d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b787229d78357942b8fc1441f2efe54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,8 +105,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.25783017, y: -0.00999999}
-  m_Size: {x: 0.8853788, y: 1.4328632}
+  m_Offset: {x: -0.24134254, y: -0.00999999}
+  m_Size: {x: 0.91835403, y: 1.5489693}
   m_Direction: 0
 --- !u!50 &9040689163527664649
 Rigidbody2D:
@@ -201,6 +201,7 @@ MonoBehaviour:
   deathScreen: {fileID: 2020047035069426888, guid: 7129ddc7caf05da40aea4c0565b9778a,
     type: 3}
   animator: {fileID: 9198911948099721528}
+  can_aim: 1
 --- !u!120 &9040689163527664653
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1224,7 +1225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14, y: 136.97}
+  m_AnchoredPosition: {x: 0, y: 136.97}
   m_SizeDelta: {x: 1373.5316, y: 62.93821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9040689164082551260
@@ -1406,7 +1407,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9040689164576806757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.6}
+  m_LocalPosition: {x: 0, y: 0, z: -0.74}
   m_LocalScale: {x: 0.011102485, y: 0.011102485, z: 0.011102485}
   m_Children:
   - {fileID: 9040689164816520251}
@@ -1671,7 +1672,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trans: {fileID: 0}
   spr: {fileID: 9040689164786503961}
-  gun_spr: {fileID: 0}
   player_scr: {fileID: 9040689163527664650}
   knife_timer: 0.5
   knife_cooldown: 0
@@ -2124,7 +2124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trans: {fileID: 9040689164974432558}
   spr: {fileID: 9040689164974432531}
-  gun_spr: {fileID: 0}
   player_scr: {fileID: 9040689163527664650}
   tase_timer: 0.5
   tase_cooldown: 0
@@ -2260,7 +2259,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9040689165108552560}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3612}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9040689163982307504}
@@ -2268,7 +2267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0015487671, y: 0.0014953613}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1599.9966, y: 900.4568}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9040689165108552565

@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player_reload1 : StateMachineBehaviour
+public class player_reload : StateMachineBehaviour
 {
-		// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-		// override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-		// {
-		// 
-		// }
+		//OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+		override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+		{
+			player player_scr = animator.gameObject.GetComponent<player>();
+			player_scr.can_aim = false;
+			player_scr.lr.enabled = false;
+			player_scr.lr.enabled = false;
+			if (player_scr.dual_wield == true) {
+				player_scr.dual_barrel.GetComponent<dual_lazer>().lr.enabled = false;
+			}
+		}
 
 
 		// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,7 +29,14 @@ public class player_reload1 : StateMachineBehaviour
 		//
 		// }
 		override public void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex) {
-			gun_scr gun_scr = animator.gameObject.GetComponent<player>().gun_scr;
+			player player_scr = animator.gameObject.GetComponent<player>();
+			player_scr.can_aim = true;
+			player_scr.lr.enabled = true;
+			player_scr.lr.enabled = true;
+			if (player_scr.dual_wield == true) {
+				player_scr.dual_barrel.GetComponent<dual_lazer>().lr.enabled = true;
+			}
+			gun_scr gun_scr = player_scr.gun_scr;
 			gun_scr.reload_cooldown = -1;
 			gun_scr.reload = false;
 			gun_scr.reload_cooldown = gun_scr.reload_timer;

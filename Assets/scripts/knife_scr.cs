@@ -6,7 +6,7 @@ public class knife_scr : MonoBehaviour
 {
     public Transform trans;
     public SpriteRenderer spr;
-    public SpriteRenderer gun_spr;
+    // public SpriteRenderer gun_spr;
     public player player_scr;
     public float knife_timer;
     public float knife_cooldown;
@@ -27,7 +27,7 @@ public class knife_scr : MonoBehaviour
             knife_cooldown -= Time.deltaTime;
             if (knife_cooldown < 0) {
                 spr.enabled = false;
-                gun_spr.enabled = true;
+                // gun_spr.enabled = true;
                 player_scr.can_shoot = true;
                 player_scr.can_knife = true;
                 player_scr.can_tase = true;
@@ -40,7 +40,7 @@ public class knife_scr : MonoBehaviour
 
     public void knife() {
         spr.enabled = true;
-        gun_spr.enabled = false;
+        // gun_spr.enabled = false;
         player_scr.can_shoot = false;
         player_scr.can_knife = true;
         player_scr.can_tase = false;

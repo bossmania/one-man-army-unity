@@ -67,10 +67,12 @@ public class player : MonoBehaviour
     public saveSystem saveSystemController = new saveSystem();
     public GameObject deathScreen;
     public Animator animator;
+    public bool can_aim;
 
     Vector2 move;
     Vector2 mousepos;
     bool dead = false;
+    float deathCooldown = 5;
 
     void changeWeapon() {
 
@@ -87,8 +89,8 @@ public class player : MonoBehaviour
                 gun = child.GetComponent<Transform>();
                 gun_scr = child.GetComponent<gun_scr>();
                 barrel = gun.GetChild(0).GetComponent<Transform>();
-                knife_scr.gun_spr = child.GetComponent<SpriteRenderer>();
-                tase_scr.gun_spr = child.GetComponent<SpriteRenderer>();
+                // knife_scr.gun_spr = child.GetComponent<SpriteRenderer>();
+                // tase_scr.gun_spr = child.GetComponent<SpriteRenderer>();
                 if (dual_wield) {
                     if (gun.GetChild(1).gameObject.activeSelf == false) {
                         gun.GetChild(1).gameObject.SetActive(true);
@@ -204,6 +206,15 @@ public class player : MonoBehaviour
             }
         }
 
+        if (dead == true) {
+          if (deathCooldown > 0) {
+            deathCooldown -= Time.deltaTime;
+          } else {
+            Instantiate(deathScreen, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+            dead = false;
+          }
+        }
+
         freeze_bar.set_freeze(freeze);
         hp_bar.set_hp(hp);
 
@@ -285,12 +296,12 @@ public class player : MonoBehaviour
             changeWeapon();
         }
 
-        if (Input.GetButton("assault rifle") || Input.GetAxisRaw("assault rifle") < 0) {
+        if (Input.GetButton("shotgun") || Input.GetAxisRaw("shotgun") < 0) {
             weapon = 1;
             changeWeapon();
         }
 
-        if (Input.GetButton("shotgun") || Input.GetAxisRaw("shotgun") > 0) {
+        if (Input.GetButton("assault rifle") || Input.GetAxisRaw("assault rifle") > 0) {
             weapon = 2;
             changeWeapon();
         }
@@ -324,37 +335,34 @@ public class player : MonoBehaviour
                 }
             }
         }
+        if (can_aim) {
+          if (Input.GetButton("aim") || Input.GetAxisRaw("aim") < 0) {
+              if (can_shoot) {
+                  lr.enabled = true;
+                  RaycastHit2D hit = Physics2D.Raycast(barrel.position, barrel.TransformDirection(Vector2.up), Mathf.Infinity, Physics2D.DefaultRaycastLayers, -50, 50);
+                  List<Vector3> pos = new List<Vector3>();
+                  pos.Add(barrel.position);
+                  pos.Add(new Vector3(hit.point.x, hit.point.y, barrel.position.z));
+                  lr.startColor = Color.red;
+                  lr.endColor = Color.red;
+                  lr.startWidth = 0.05f;
+                  lr.endWidth = 0.05f;
+                  lr.SetPositions(pos.ToArray());
+                  lr.useWorldSpace = true;
+                  if (weapons[(int)weapon] == "sniper") {
+                      Camera.main.orthographicSize = 12f;
+                  } else {
+                      Camera.main.orthographicSize = 8.83f;
+                  }
+              } else {
+                  lr.enabled = false;
+              }
+          }
 
-        if (Input.GetButton("aim") || Input.GetAxisRaw("aim") < 0) {
-            if (can_shoot) {
-                lr.enabled = true;
-                RaycastHit2D hit = Physics2D.Raycast(barrel.position, barrel.TransformDirection(Vector2.up), Mathf.Infinity, Physics2D.DefaultRaycastLayers, -50, 50);
-                List<Vector3> pos = new List<Vector3>();
-                pos.Add(barrel.position);
-                if (hit.collider != null) {
-                    pos.Add(hit.point);
-                } else {
-                    pos.Add(barrel.TransformDirection(Vector2.up).normalized * 1000);
-                }
-                lr.startColor = Color.red;
-                lr.endColor = Color.red;
-                lr.startWidth = 0.05f;
-                lr.endWidth = 0.05f;
-                lr.SetPositions(pos.ToArray());
-                lr.useWorldSpace = true;
-                if (weapons[(int)weapon] == "sniper") {
-                    Camera.main.orthographicSize = 12f;
-                } else {
-                    Camera.main.orthographicSize = 8.83f;
-                }
-            } else {
-                lr.enabled = false;
-            }
-        }
-
-        if (Input.GetButtonUp("aim") || Input.GetAxisRaw("aim") == 0) {
-            lr.enabled = false;
-            Camera.main.orthographicSize = 8.83f;
+          if (Input.GetButtonUp("aim") || Input.GetAxisRaw("aim") == 0) {
+              lr.enabled = false;
+              Camera.main.orthographicSize = 8.83f;
+          }
         }
 
         if (Input.GetButtonDown("knife")) {
@@ -427,28 +435,16 @@ public class player : MonoBehaviour
     void deathState() {
         GetComponent<SpriteRenderer>().enabled = false;
         filter.enabled = false;
+        can_aim = false;
         lr.enabled = false;
         knockback = false;
         move = new Vector2(0, 0);
         rb.velocity = new Vector2(0, 0);
         state = "cutsceneState";
         dead = true;
+        rb.rotation -= 90f;
         GetComponent<SpriteRenderer>().enabled = true;
-        
-        if ((Input.GetAxis("mouse x") != 0 || Input.GetAxis("mouse y") != 0)) {
-            mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 gun_pos = new Vector2(gun.position.x, gun.position.y);
-            Vector2 lookdir = mousepos - gun_pos;
-            rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
-        }
-
-        if ((Input.GetAxis("right x") != 0 || Input.GetAxis("right y") != 0)) {
-            Vector2 lookdir = new Vector2(Input.GetAxis("right x"), Input.GetAxis("right y"));
-            rb.rotation = Mathf.Atan2(lookdir.y, lookdir.x) * Mathf.Rad2Deg;
-        }
-
-        // Instantiate(deathScreen, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
-        // Destroy(gameObject);
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     void cutsceneState() {

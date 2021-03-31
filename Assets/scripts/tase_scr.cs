@@ -6,7 +6,7 @@ public class tase_scr : MonoBehaviour
 {
     public Transform trans;
     public SpriteRenderer spr;
-    public SpriteRenderer gun_spr;
+    // public SpriteRenderer gun_spr;
     public player player_scr;
     public float tase_timer;
     public float tase_cooldown;
@@ -27,7 +27,7 @@ public class tase_scr : MonoBehaviour
             tase_cooldown -= Time.deltaTime;
             if (tase_cooldown < 0) {
                 spr.enabled = false;
-                gun_spr.enabled = true;
+                // gun_spr.enabled = true;
                 player_scr.can_shoot = true;
                 player_scr.can_knife = true;
                 player_scr.can_tase = true;
@@ -40,7 +40,7 @@ public class tase_scr : MonoBehaviour
 
     public void tase() {
         spr.enabled = true;
-        gun_spr.enabled = false;
+        // gun_spr.enabled = false;
         player_scr.can_shoot = false;
         player_scr.can_knife = false;
         player_scr.can_tase = true;
